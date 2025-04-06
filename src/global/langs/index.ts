@@ -1,4 +1,4 @@
 import { en } from './en';
-import { ru } from './ru';
+import { by } from './by';
 
-export const langs = { en, ru } as const;
+export const langs = { en, by } as const;

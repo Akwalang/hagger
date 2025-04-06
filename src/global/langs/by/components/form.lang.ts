@@ -4,8 +4,8 @@ export const form: FormComponentLang = {
   keyValueEditor: {
     columns: {
       key: () => 'Ключ',
-      value: () => 'Значение',
-      description: () => 'Описание',
+      value: () => 'Значэнне',
+      description: () => 'Апісанне',
     },
   },
 };

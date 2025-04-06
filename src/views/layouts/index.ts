@@ -1,1 +1,1 @@
-export * from './CollectionsLayout/CollectionsLayout';
+export * from './MainLayout/MainLayout';

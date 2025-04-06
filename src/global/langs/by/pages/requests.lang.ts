@@ -5,12 +5,12 @@ export const requests: RequestsPageLang = {
     tabs: {
       params: {
         name: () => 'Параметры',
-        queryParamsTitle: () => 'Параметры запроса',
-        pathVariablesTitle: () => 'Переменные пути',
+        queryParamsTitle: () => 'Параметры запыту',
+        pathVariablesTitle: () => 'Пераменныя шляха',
       },
       headers: {
-        name: () => 'Заголовки',
-        headersTitle: () => 'Заголовки',
+        name: () => 'Загалоўкі',
+        headersTitle: () => 'Загалоўкі',
       },
     },
   },

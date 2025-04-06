@@ -11,6 +11,6 @@ interface Actions {
 }
 
 export const useLangStore = create<State & Actions>((set) => ({
-  lang: 'ru',
+  lang: 'by',
   setLang: (lang) => set(() => ({ lang })),
 }));
