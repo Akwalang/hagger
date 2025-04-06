@@ -1,4 +1,4 @@
-import { Globe, Check } from 'lucide-react';
+import { Languages, Check } from 'lucide-react';
 
 import { langs } from '@/global/langs';
 import { useLang } from '@/global/hooks';
@@ -34,8 +34,8 @@ export const LangSwitcher: React.FC<LangSwitcherProps> = () => {
       <Base.DropdownMenu>
         <Base.DropdownMenuTrigger asChild>
           <Button variant="link" size="sm" className="h-full flex p-0.5 shadow-none bg-transparent focus:outline-none hover:no-underline">
-            <Globe className="text-foreground" size={14} />
-            <div className="text-xs text-foreground">{lang.name()}</div>
+            <Languages className="text-foreground" size={14} />
+            <div className="text-xs text-foreground ml-[-3px]">{lang.name()}</div>
           </Button>
         </Base.DropdownMenuTrigger>
         <Base.DropdownMenuContent align="end" className="w-[160px]">

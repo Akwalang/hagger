@@ -7,6 +7,7 @@ import {
 import { useUiStore } from "../../stores/ui.store";
 
 interface MainLayoutProps {
+  collection: React.ReactNode;
   requestLayout: React.ReactNode;
 }
 
@@ -22,7 +23,8 @@ export const MainLayout: React.FC<MainLayoutProps> = (props) => {
       className="items-stretch"
       onLayout={(sizes: number[]) => setCollectionSize(sizes[0])}
     >
-      <ResizablePanel defaultSize={layout[0]} minSize={15} maxSize={30}>
+      <ResizablePanel className="h-full" defaultSize={layout[0]} minSize={18} maxSize={30}>
+        {props.collection}
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={layout[1]}>

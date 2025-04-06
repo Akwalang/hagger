@@ -1,6 +1,7 @@
 import { MainLayout } from './layouts/MainLayout/MainLayout';
 import { RequestLayout } from './layouts/RequestLayout/RequestLayout';
 
+import { Collection } from './components/Collection/Collection';
 import { RequestMain } from './components/RequestMain/RequestMain';
 import { RequestSettings } from './components/RequestSettings/RequestSettings';
 import { Response } from './components/Response/Response';
@@ -27,6 +28,8 @@ export const RequestsPage: React.FC<RequestsPageProps> = () => {
     },
   };
 
+  const collection = <Collection />;
+
   const requestLayout = (
     <RequestLayout
       requestMain={<RequestMain breadcrumb={breadcrumb} {...req} />}
@@ -35,5 +38,5 @@ export const RequestsPage: React.FC<RequestsPageProps> = () => {
     />
   );
 
-  return <MainLayout requestLayout={requestLayout} />;
+  return <MainLayout collection={collection} requestLayout={requestLayout} />;
 };
