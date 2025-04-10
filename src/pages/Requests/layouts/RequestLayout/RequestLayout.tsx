@@ -1,6 +1,6 @@
 import * as BaseRS from "@/views/ui/resizable";
 
-import { useUiStore } from "../../stores/ui.store";
+import { useUiStore } from "../../stores/ui";
 
 interface RequestLayoutProps {
   requestMain: React.ReactNode;
@@ -15,7 +15,7 @@ export const RequestLayout: React.FC<RequestLayoutProps> = (props) => {
   const layout = [size, 100 - size];
 
   return (
-    <div className="flex flex-col items-stretch h-full">
+    <div className="flex grow flex-col items-stretch h-full">
       <div className="h-[80px]">
         {props.requestMain}
       </div>

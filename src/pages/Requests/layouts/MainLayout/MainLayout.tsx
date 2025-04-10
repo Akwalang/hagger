@@ -4,11 +4,11 @@ import {
   ResizablePanelGroup,
 } from "@/views/ui/resizable";
 
-import { useUiStore } from "../../stores/ui.store";
+import { useUiStore } from "../../stores/ui";
 
 interface MainLayoutProps {
   collection: React.ReactNode;
-  requestLayout: React.ReactNode;
+  workingArea: React.ReactNode;
 }
 
 export const MainLayout: React.FC<MainLayoutProps> = (props) => {
@@ -28,7 +28,7 @@ export const MainLayout: React.FC<MainLayoutProps> = (props) => {
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={layout[1]}>
-        {props.requestLayout}
+        {props.workingArea}
       </ResizablePanel>
     </ResizablePanelGroup>
   );

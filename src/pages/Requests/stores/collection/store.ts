@@ -35,5 +35,5 @@ interface Actions {
 
 export const useCollectionStore = create<State & Actions>((set) => ({
   sources: [],
-
+  addSource: (source) => set((state) => ({ sources: [...state.sources, source] })),
 }));
