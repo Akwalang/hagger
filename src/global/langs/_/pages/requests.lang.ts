@@ -1,4 +1,8 @@
 export type RequestsPageLang = {
+  requestMain: {
+    urlPlaceholder: () => string;
+    sendButton: () => React.ReactNode;
+  };
   requestSettings: {
     tabs: {
       params: {

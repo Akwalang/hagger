@@ -5,18 +5,19 @@ import { createDict } from '@/utils/array';
 import { cn } from '@/utils/react';
 
 import { usePageStore } from '../../stores/page';
+import { getActiveGroup, getTabs } from '../../stores/page/selectors';
 
 interface TabProps {
   name: string;
   isActive: boolean;
-  setActivePageId: (event: MouseEvent<HTMLDivElement>) => void;
+  setActivePage: (event: MouseEvent<HTMLDivElement>) => void;
   closeTab: (event: MouseEvent<HTMLDivElement>) => void;
 }
 
 const Tab: React.FC<TabProps> = (props) => {
   return (
     <>
-      <div className={cn("relative h-full text-sm flex items-center", props.isActive ? "cursor-default" : "cursor-pointer")} onClick={props.setActivePageId}>
+      <div className={cn("relative h-full text-sm flex items-center", props.isActive ? "cursor-default" : "cursor-pointer")} onClick={props.setActivePage}>
         <div className="pl-2 pr-0.5">{props.name}</div>
         <div onClick={props.closeTab}><X className="h-[14px] cursor-pointer" /></div>
         {props.isActive && <div className="absolute left-[5px] right-[5px] bottom-0 h-[2px] bg-primary"/>}
@@ -29,7 +30,10 @@ const Tab: React.FC<TabProps> = (props) => {
 interface TabsProps {}
 
 export const Tabs: React.FC<TabsProps> = () => {
-  const { activePageId, tabs, pages, setActivePageId, closeTab } = usePageStore((state) => state);
+  const { activePageId, tabs, pages } = usePageStore(getActiveGroup);
+
+  const closeTab = usePageStore((state) => state.closeTab);
+  const setActivePage = usePageStore((state) => state.setActivePage);
 
   const dict = createDict(pages, 'id');
 
@@ -37,11 +41,11 @@ export const Tabs: React.FC<TabsProps> = () => {
     const page = dict.get(tab.pageId);
 
     const props = {
-      key: tab.pageId,
       name: page!.name,
       isActive: tab.pageId === activePageId,
-      setActivePageId: () => {
-        setActivePageId(tab.pageId);
+      setActivePage: (event: MouseEvent) => {
+        event.stopPropagation();
+        setActivePage(tab.pageId);
       },
       closeTab: (event: MouseEvent) => {
         event.stopPropagation();
@@ -49,7 +53,7 @@ export const Tabs: React.FC<TabsProps> = () => {
       },
     };
 
-    return <Tab {...props} />;
+    return <Tab key={tab.pageId} {...props} />;
   });
 
   return (

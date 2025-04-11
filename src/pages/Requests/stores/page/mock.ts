@@ -1,6 +1,9 @@
 import { HttpMethod } from "@/global/enums/http-method.enum";
+
+import { TabItem } from "./domains/tabs/types";
+
+import { Group, RequestPage } from "./types";
 import { PageType } from "./enums";
-import { RequestPage, TabItem } from "./types";
 
 export const mockTabs = (): TabItem[] => [
   { pageId: '1' },
@@ -13,9 +16,8 @@ const createMockPage = (id: string, name: string): RequestPage => ({
   name: name,
   type: PageType.Request,
   data: {
-    id: '',
     request: {
-      method: HttpMethod.GET,
+      method: HttpMethod.Post,
       url: 'https://glitchgallery.org/support/:id/:slug',
       headers: [
         {
@@ -29,6 +31,7 @@ const createMockPage = (id: string, name: string): RequestPage => ({
           description: 'The authorization token for the request'
         }
       ],
+      cookies: [],
       params: {
         path: [
           { name: 'id', value: '123', description: 'The ID of the item' },
@@ -49,8 +52,19 @@ const createMockPage = (id: string, name: string): RequestPage => ({
   }
 });
 
-export const mockPages = (): RequestPage[] => [
-  createMockPage('1', 'Support page'),
-  createMockPage('2', 'About us page'),
-  createMockPage('3', 'Contact us page'),
+const createMockGroup = (id: string, name: string): Group => ({
+  id: id,
+  icon: 'icon',
+  name: name,
+  tabs: mockTabs(),
+  pages: [
+    createMockPage('1', 'Support page'),
+    createMockPage('2', 'About us page'),
+    createMockPage('3', 'Contact us page'),
+  ],
+  activePageId: '2',
+});
+
+export const mockGroups = [
+  createMockGroup('1', 'main'),
 ];

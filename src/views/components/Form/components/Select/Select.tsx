@@ -4,7 +4,7 @@ import { cn } from '@/utils/react';
 
 type Item = {
   name: string;
-  value: string
+  value: string;
 };
 
 type Group = {
@@ -13,6 +13,7 @@ type Group = {
 };
 
 interface SelectProps extends React.RefAttributes<HTMLButtonElement> {
+  onChange?: (value: string) => void;
   className?: string;
   value?: string;
   placeholder?: string;
@@ -46,20 +47,15 @@ const Groups: React.FC<{ groups: Group[] }> = (props) => {
 };
 
 export const Select: React.FC<SelectProps> = (props) => {
-  const { value, placeholder, items, groups, className, ...other } = props;
+  const { value, placeholder, items, groups, className, onChange, ...other } = props;
 
   const children = [];
 
-  if (items?.length) {
-    children.push(<Items key="i" items={items} />);
-  }
-
-  if (groups?.length) {
-    children.push(<Groups key="g" groups={groups} />);
-  }
+  items?.length && children.push(<Items key="i" items={items} />);
+  groups?.length && children.push(<Groups key="g" groups={groups} />);
 
   return (
-    <Base.Select value={props.value}>
+    <Base.Select value={props.value} onValueChange={onChange}>
       <Base.SelectTrigger className={cn('text-left [&>span]:grow', className)} {...other}>
         <Base.SelectValue placeholder={placeholder} />
       </Base.SelectTrigger>

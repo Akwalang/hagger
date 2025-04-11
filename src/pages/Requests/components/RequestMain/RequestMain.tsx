@@ -1,39 +1,48 @@
 import { Breadcrumb, Form } from '@/views/components';
 
-import { type KeyValueItem } from '@/views/components/Form/Form';
+import { useLang, useInput } from '@/global/hooks';
+import { HttpMethod } from '@/global/enums/http-method.enum';
+
+import { type RequestPage } from '../../stores/page/types';
+import { usePageStore } from '../../stores/page';
 
 interface RequestMainProps {
-  breadcrumb: { name: string }[];
-  method: string;
-  url: string;
-  headers: KeyValueItem[];
-  params: {
-    path: KeyValueItem[];
-    query: KeyValueItem[];
-  };
+  page: RequestPage;
 }
 
+const methods = Object.values(HttpMethod).map((value) => (
+  { name: value.toUpperCase(), value }
+));
+
 export const RequestMain: React.FC<RequestMainProps> = (props) => {
-  const items = [
-    { name: 'GET', value: 'get' },
-    { name: 'POST', value: 'post' },
-    { name: 'PATCH', value: 'patch' },
-    { name: 'PUT', value: 'put' },
-    { name: 'DELETE', value: 'delete' },
-    { name: 'HEAD', value: 'head' },
-    { name: 'OPTIONS', value: 'options' },
+  const { request } = props.page.data;
+
+  const lang = useLang((store) => store.pages.requests.requestMain);
+
+  const changeRequestMethod = usePageStore((state) => state.changeRequestMethod);
+  const changeRequestUrl = usePageStore((state) => state.changeRequestUrl);
+
+  const onInputChange = useInput(changeRequestUrl);
+
+  const breadcrumb = [
+    { name: 'Item 1' },
+    { name: 'Item 2' },
+    { name: 'Item 3' },
+    { name: 'Item 4' },
+    { name: 'Item 5' },
+    { name: 'Item 6' },
   ];
 
   return (
     <div className="px-[15px]">
       <div className="flex flex-col py-[10px]">
-        <Breadcrumb items={props.breadcrumb} />
+        <Breadcrumb items={breadcrumb} />
       </div>
 
       <div className="flex gap-2">
-        <Form.Select className="w-[120px] text-center" value={items[0].value} items={items} />
-        <Form.Input className="grow" value={props.url} />
-        <Form.Button type="submit">Send</Form.Button>
+        <Form.Select className="min-w-[110px] max-w-[110px] text-center" value={request.method} items={methods} onChange={changeRequestMethod}  />
+        <Form.Input className="grow" value={request.url} onChange={onInputChange} placeholder={lang.urlPlaceholder()} />
+        <Form.Button type="submit">{lang.sendButton()}</Form.Button>
       </div>
     </div>
   );

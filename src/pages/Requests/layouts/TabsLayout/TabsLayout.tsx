@@ -6,14 +6,6 @@ import { Response } from '../../components/Response/Response';
 import { RequestLayout } from '../RequestLayout/RequestLayout';
 
 export const TabsLayout: React.FC = () => {
-  const breadcrumb = [
-    { name: 'Item 1' },
-    { name: 'Item 2' },
-    { name: 'Item 3' },
-    { name: 'Item 4' },
-    { name: 'Item 5' },
-    { name: 'Item 6' },
-  ];
 
   const req = {
     method: 'get',
@@ -29,7 +21,6 @@ export const TabsLayout: React.FC = () => {
     <div className="flex flex-col items-stretch h-full">
       <Tabs />
       <RequestLayout
-        requestMain={<RequestMain breadcrumb={breadcrumb} {...req} />}
         requestSettings={<RequestSettings {...req} />}
         response={<Response />}
       />
