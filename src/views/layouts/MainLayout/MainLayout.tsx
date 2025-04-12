@@ -1,4 +1,4 @@
-import { LangSwitcher } from '@/views/components';
+import { LangSwitcher, ThemeSwitcher } from '@/views/components';
 
 import { cn }from '@/utils/react';
 
@@ -13,8 +13,11 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, className, ...
         {children}
       </div>
       <div className="w-full h-[20px] flex justify-between bg-background brightness-90 border-border border-t-[1px]">
-        <div className="p-0.5">
+        <div className="p-0.5 flex gap-1">
           <LangSwitcher />
+          <ThemeSwitcher />
+        </div>
+        <div className="p-0.5">
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { useLangStore } from '@/global/stores/lang/lang.store';
-import { LangType } from '@/global/langs/_';
+import { LangType } from '@/global/data/langs/_';
 
-import { langs } from '@/global/langs';
+import { langs } from '@/global/data/langs';
 
 export const useLang = <T>(
   selector?: (state: LangType, cur: string) => T,

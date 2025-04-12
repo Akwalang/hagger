@@ -1,6 +1,6 @@
 import { Languages, Check } from 'lucide-react';
 
-import { langs } from '@/global/langs';
+import { langs } from '@/global/data/langs';
 import { useLang } from '@/global/hooks';
 import { useLangStore } from '@/global/stores/lang/lang.store';
 

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { langs } from '@/global/langs';
+import { langs } from '@/global/data/langs';
 
 interface State {
   lang: keyof typeof langs;
