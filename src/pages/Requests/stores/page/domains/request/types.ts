@@ -2,9 +2,11 @@ import { HttpMethod } from '@/global/enums/http-method.enum';
 import { HttpCode } from '@/global/enums/http-codes.enum';
 
 export type RequestParameter = {
-  name: string,
+  active: boolean,
+  key: string,
   value: string,
   description: string,
+  isRequired: boolean,
 };
 
 export type RequestCookie = {};
@@ -15,6 +17,7 @@ export type ResponseParameter = {
 };
 
 export type Request = {
+  sourceId: string | null,
   request: {
     method: HttpMethod,
     url: string,

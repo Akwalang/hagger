@@ -2,8 +2,6 @@ import { Checkbox } from "@/views/ui/checkbox"
 
 import { useLang } from '@/global/hooks/useLang';
 
-import { cn } from '@/utils/react';
-
 export type KeyValueItem = {
   active: boolean;
   key: string;

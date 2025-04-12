@@ -10,12 +10,13 @@ import { useUiStore } from "../../stores/ui";
 import { getActivePage } from "../../stores/page/selectors";
 
 interface RequestLayoutProps {
-  requestSettings: React.ReactNode;
   response: React.ReactNode;
 }
 
 export const RequestLayout: React.FC<RequestLayoutProps> = (props) => {
   const page = usePageStore(getActivePage);
+
+  console.log('UPDATE LAYOUT \\>', page);
 
   const size = useUiStore((state) => state.requestSize);
   const setRequestSize = useUiStore((state) => state.setRequestSize);
@@ -27,7 +28,7 @@ export const RequestLayout: React.FC<RequestLayoutProps> = (props) => {
   return (
     <div className="flex grow flex-col items-stretch h-full">
       <div className="h-[80px]">
-        <RequestMain page={page} />
+        <RequestMain {...page.data} />
       </div>
       <div className="flex grow">
         <BaseRS.ResizablePanelGroup
@@ -36,7 +37,7 @@ export const RequestLayout: React.FC<RequestLayoutProps> = (props) => {
           onLayout={(sizes: number[]) => setRequestSize(sizes[0])}
         >
           <BaseRS.ResizablePanel defaultSize={layout[0]} className="flex flex-col">
-            {props.requestSettings}
+            <RequestSettings {...page.data} />
           </BaseRS.ResizablePanel>
           <BaseRS.ResizableHandle withHandle />
           <BaseRS.ResizablePanel defaultSize={layout[1]}>

@@ -1,29 +1,31 @@
+import { isFunction } from "../is";
+
 type Item = Record<string, any>;
 
-function createDict<T extends Item, K extends T[keyof T]>(
+function createDict<T extends Item, K extends keyof T>(
   array: T[],
-  field: keyof T,
-): Map<K, T>;
+  key: K
+): Map<T[K], T>;
 
-function createDict<T extends Item, K>(
+function createDict<T extends Item, V>(
   array: T[],
-  getter: (item: T) => K,
-): Map<K, T>;
+  getter: (item: T) => V
+): Map<V, T>;
 
-function createDict<T extends Item, K>(
+function createDict<T extends Item, K extends keyof T, V>(
   array: T[],
-  fieldOrGetter: keyof T | ((item: T) => any),
-): Map<K, T> {
-  const result = new Map<any, T>();
+  keyOrGetter: K | ((item: T) => V)
+): Map<K extends keyof T ? T[K] : V, T> {
+  const result = new Map<K extends keyof T ? T[K] : V, T>();
 
-  const getter = typeof fieldOrGetter === 'function'
-    ? fieldOrGetter
-    : (item: T) => item[fieldOrGetter];
+  const getter = isFunction(keyOrGetter)
+    ? keyOrGetter as ((item: T) => V)
+    : ((item: T) => item[keyOrGetter as T[keyof T]]);
 
   for (const item of array) {
-    const key = getter(item);
+    const key = (getter as Function)(item);
 
-    key && result.set(key, item);
+    !!key && result.set(key, item);
   }
 
   return result;

@@ -3,19 +3,17 @@ import { Breadcrumb, Form } from '@/views/components';
 import { useLang, useInput } from '@/global/hooks';
 import { HttpMethod } from '@/global/enums/http-method.enum';
 
-import { type RequestPage } from '../../stores/page/types';
+import { Request } from '../../stores/page/domains/request/types';
 import { usePageStore } from '../../stores/page';
 
-interface RequestMainProps {
-  page: RequestPage;
-}
+interface RequestMainProps extends Request {}
 
 const methods = Object.values(HttpMethod).map((value) => (
   { name: value.toUpperCase(), value }
 ));
 
 export const RequestMain: React.FC<RequestMainProps> = (props) => {
-  const { request } = props.page.data;
+  const { request } = props;
 
   const lang = useLang((store) => store.pages.requests.requestMain);
 

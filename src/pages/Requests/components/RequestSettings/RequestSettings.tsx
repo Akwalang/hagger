@@ -1,27 +1,20 @@
 import { Tabs } from '@/views/components';
+import { type KeyValueItem } from '@/views/components/Form/Form';
 
 import { Params } from './components/Params/Params';
 import { Headers } from './components/Headers/Headers';
 
-import { type KeyValueItem } from '@/views/components/Form/Form';
+import { Request } from '../../stores/page/domains/request/types';
 
 import { useLang } from '@/global/hooks';
 
-interface RequestSettingsProps {
-  method: string;
-  url: string;
-  headers: KeyValueItem[];
-  params: {
-    path: KeyValueItem[];
-    query: KeyValueItem[];
-  };
-}
+interface RequestSettingsProps extends Request {}
 
 export const RequestSettings: React.FC<RequestSettingsProps> = (props) => {
   const lang = useLang((store) => store.pages.requests.requestSettings.tabs);
 
   const tabs = [
-    { name: lang.params.name(), value: 'params', content: () => <Params /> },
+    { name: lang.params.name(), value: 'params', content: () => <Params {...props.request.params} /> },
     { name: lang.headers.name(), value: 'headers', content: () => <Headers /> },
   ];
 
