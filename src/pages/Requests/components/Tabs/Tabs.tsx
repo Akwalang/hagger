@@ -1,6 +1,8 @@
 import { MouseEvent } from 'react';
 import { X } from 'lucide-react';
 
+import { Separator } from '@/views/ui/separator';
+
 import { createDict } from '@/utils/array';
 import { cn } from '@/utils/react';
 
@@ -22,9 +24,10 @@ const Tab: React.FC<TabProps> = (props) => {
         <div onClick={props.closeTab}><X className="h-[14px] cursor-pointer" /></div>
         {props.isActive && <div className="absolute left-[5px] right-[5px] bottom-0 h-[2px] bg-primary"/>}
       </div>
-      <div className="w-[1px] h-[45%] bg-border brightness-70" />
+      <Separator className="h-[45%]" orientation="vertical" />
     </>
   );
+  // <div className="w-[1px] h-[45%] bg-border brightness-70" />
 };
 
 interface TabsProps {}
@@ -57,7 +60,7 @@ export const Tabs: React.FC<TabsProps> = () => {
   });
 
   return (
-    <div className="w-full h-[36px] flex items-center border-b-1 border-b-secondary">
+    <div className="w-full h-[36px] flex items-center">
       {children}
     </div>
   );
