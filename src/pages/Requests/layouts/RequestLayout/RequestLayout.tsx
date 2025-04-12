@@ -9,14 +9,10 @@ import { useUiStore } from "../../stores/ui";
 
 import { getActivePage } from "../../stores/page/selectors";
 
-interface RequestLayoutProps {
-  response: React.ReactNode;
-}
+interface RequestLayoutProps {}
 
-export const RequestLayout: React.FC<RequestLayoutProps> = (props) => {
+export const RequestLayout: React.FC<RequestLayoutProps> = () => {
   const page = usePageStore(getActivePage);
-
-  console.log('UPDATE LAYOUT \\>', page);
 
   const size = useUiStore((state) => state.requestSize);
   const setRequestSize = useUiStore((state) => state.setRequestSize);
@@ -41,7 +37,7 @@ export const RequestLayout: React.FC<RequestLayoutProps> = (props) => {
           </BaseRS.ResizablePanel>
           <BaseRS.ResizableHandle withHandle />
           <BaseRS.ResizablePanel defaultSize={layout[1]}>
-            {props.response}
+            <Response />
           </BaseRS.ResizablePanel>
         </BaseRS.ResizablePanelGroup>
       </div>
