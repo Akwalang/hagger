@@ -43,16 +43,16 @@ const KeyValueItem: React.FC<KeyValueItemProps> = (props) => {
     onChange: adjustHeight,
   };
 
-  useEffect(adjustHeight, []);
+  useEffect(adjustHeight, [props.item.key, props.item.value, props.item.description]);
 
   return (
     <>
       <div className="flex justify-center">
         {props.edit?.includes('active') && <Checkbox className="block my-[5px]" disabled={props.item.isRequired} checked={props.item.active} />}
       </div>
-      <textarea ref={(tag) => ref.current[0] = tag} defaultValue={props.item.key} {...taProps} />
-      <textarea ref={(tag) => ref.current[1] = tag} defaultValue={props.item.value} {...taProps} />
-      <textarea ref={(tag) => ref.current[2] = tag} defaultValue={props.item.description} {...taProps} />
+      <textarea key={props.item.key} ref={(tag) => ref.current[0] = tag} {...taProps} defaultValue={props.item.key} />
+      <textarea key={props.item.value} ref={(tag) => ref.current[1] = tag} {...taProps} defaultValue={props.item.value} />
+      <textarea key={props.item.description} ref={(tag) => ref.current[2] = tag} {...taProps} defaultValue={props.item.description} />
     </>
   );
 };
