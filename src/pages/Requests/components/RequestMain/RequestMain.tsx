@@ -1,4 +1,6 @@
 import { memo } from 'react';
+import { ChevronDown } from 'lucide-react';
+
 import { Breadcrumb, Form } from '@/views/components';
 
 import { useLang, useInput } from '@/global/hooks';
@@ -6,6 +8,7 @@ import { HttpMethod } from '@/global/enums/http-method.enum';
 
 import { Request } from '../../stores/page/domains/request/types';
 import { usePageStore } from '../../stores/page';
+import { cn } from '@/utils/react';
 
 interface RequestMainProps extends Request {}
 
@@ -41,7 +44,15 @@ export const RequestMain: React.FC<RequestMainProps> = memo((props) => {
       <div className="flex gap-2">
         <Form.Select className="min-w-[110px] max-w-[110px] text-center" value={request.method} items={methods} onChange={changeRequestMethod}  />
         <Form.Input className="grow" value={request.url} onChange={onInputChange} placeholder={lang.urlPlaceholder()} />
-        <Form.Button type="submit">{lang.sendButton()}</Form.Button>
+        <div className="relative flex">
+          <Form.Button type="submit">{lang.sendButton()}</Form.Button>
+          <Form.Button size="sm" variant="secondary" className={cn(
+            "absolute top-[-10px] right-[-10px]",
+            "w-[20px] h-[20px]",
+          )}>
+            <ChevronDown size={20} />
+          </Form.Button>
+        </div>
       </div>
     </div>
   );
