@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 import { Checkbox } from "@/views/ui/checkbox"
 
 import { useLang } from '@/global/hooks/useLang';
@@ -16,20 +18,39 @@ interface KeyValueItemProps {
   edit?: (keyof KeyValueItem)[];
 }
 
+type TextareaRef = HTMLTextAreaElement | null;
+
 const KeyValueItem: React.FC<KeyValueItemProps> = (props) => {
-  const textAreaClassName = cn(
-    // "resize-none focus:outline-1 focus:inset-ring-[1px] focus:inset-ring",
-    "resize-none focus:outline-0",
-  );
+  const ref = useRef<[TextareaRef, TextareaRef, TextareaRef]>([null, null, null]);
+
+  const adjustHeight = () => {
+    const heights = [0, 0, 0];
+
+    for (let i = 0; i < ref.current.length; i++) {
+      ref.current[i]!.style.height = '1px';
+      heights[i] = ref.current[i]!.scrollHeight + 2;
+    }
+
+    const max = Math.max(...heights);
+
+    ref.current.forEach((tag) => tag!.style.height = max + 'px');
+  };
+
+  const taProps = {
+    className: "resize-none focus:outline-0 focus:relative focus:border-primary overflow-hidden",
+    onChange: adjustHeight,
+  };
+
+  useEffect(adjustHeight, []);
 
   return (
     <>
       <div className="flex items-center justify-center">
         {props.edit?.includes('active') && <Checkbox className="block" disabled={props.item.isRequired} checked={props.item.active} />}
       </div>
-      <textarea className={textAreaClassName}>{props.item.key}</textarea>
-      <textarea className={textAreaClassName}>{props.item.value}</textarea>
-      <textarea className={textAreaClassName}>{props.item.description}</textarea>
+      <textarea ref={(tag) => ref.current[0] = tag} defaultValue={props.item.key} {...taProps} />
+      <textarea ref={(tag) => ref.current[1] = tag} defaultValue={props.item.value} {...taProps} />
+      <textarea ref={(tag) => ref.current[2] = tag} defaultValue={props.item.description} {...taProps} />
     </>
   );
 };
@@ -46,8 +67,8 @@ export const KeyValueEditor: React.FC<KeyValueEditorProps> = (props) => {
 
   const rootClassName = cn(
     "grid gap-0 grid-cols-[32px_2fr_3fr_6fr]",
-    "font-light text-left text-[0.91rem] border-t-1 border-l-1",
-    "[&>*]:px-2 [&>*]:py-1 [&>*]:border-r-1 [&>*]:border-b-1",
+    "font-light text-left text-[0.91rem] pt-[1px] pl-[1px]",
+    "[&>*]:px-2 [&>*]:py-1 [&>*]:border-[1px] [&>*]:ml-[-1px] [&>*]:mt-[-1px]",
   );
 
   return (
