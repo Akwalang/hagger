@@ -27,8 +27,10 @@ const KeyValueItem: React.FC<KeyValueItemProps> = (props) => {
     const heights = [0, 0, 0];
 
     for (let i = 0; i < ref.current.length; i++) {
+      const height = ref.current[i]?.style.height || ref.current[i]?.clientHeight + 'px';
       ref.current[i]!.style.height = '1px';
       heights[i] = ref.current[i]!.scrollHeight + 2;
+      ref.current[i]!.style.height = height;
     }
 
     const max = Math.max(...heights);
@@ -45,8 +47,8 @@ const KeyValueItem: React.FC<KeyValueItemProps> = (props) => {
 
   return (
     <>
-      <div className="flex items-center justify-center">
-        {props.edit?.includes('active') && <Checkbox className="block" disabled={props.item.isRequired} checked={props.item.active} />}
+      <div className="flex justify-center">
+        {props.edit?.includes('active') && <Checkbox className="block my-[5px]" disabled={props.item.isRequired} checked={props.item.active} />}
       </div>
       <textarea ref={(tag) => ref.current[0] = tag} defaultValue={props.item.key} {...taProps} />
       <textarea ref={(tag) => ref.current[1] = tag} defaultValue={props.item.value} {...taProps} />

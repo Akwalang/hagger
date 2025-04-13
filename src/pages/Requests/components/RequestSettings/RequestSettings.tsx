@@ -1,5 +1,5 @@
+import { memo } from 'react';
 import { Tabs } from '@/views/components';
-import { type KeyValueItem } from '@/views/components/Form/Form';
 
 import { Params } from './components/Params/Params';
 import { Headers } from './components/Headers/Headers';
@@ -10,7 +10,7 @@ import { useLang } from '@/global/hooks';
 
 interface RequestSettingsProps extends Request {}
 
-export const RequestSettings: React.FC<RequestSettingsProps> = (props) => {
+export const RequestSettings: React.FC<RequestSettingsProps> = memo((props) => {
   const lang = useLang((store) => store.pages.requests.requestSettings.tabs);
 
   const tabs = [
@@ -23,4 +23,4 @@ export const RequestSettings: React.FC<RequestSettingsProps> = (props) => {
       <Tabs className="px-[15px]" tabs={tabs} defaultValue={tabs[0].value} scrollable={true} />
     </div>
   );
-};
+});

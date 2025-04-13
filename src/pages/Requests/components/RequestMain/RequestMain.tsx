@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Breadcrumb, Form } from '@/views/components';
 
 import { useLang, useInput } from '@/global/hooks';
@@ -12,7 +13,7 @@ const methods = Object.values(HttpMethod).map((value) => (
   { name: value.toUpperCase(), value }
 ));
 
-export const RequestMain: React.FC<RequestMainProps> = (props) => {
+export const RequestMain: React.FC<RequestMainProps> = memo((props) => {
   const { request } = props;
 
   const lang = useLang((store) => store.pages.requests.requestMain);
@@ -44,4 +45,4 @@ export const RequestMain: React.FC<RequestMainProps> = (props) => {
       </div>
     </div>
   );
-};
+});
