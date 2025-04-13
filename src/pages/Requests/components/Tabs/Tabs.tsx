@@ -22,12 +22,11 @@ const Tab: React.FC<TabProps> = (props) => {
       <div className={cn("relative h-full text-sm flex items-center", props.isActive ? "cursor-default" : "cursor-pointer")} onClick={props.setActivePage}>
         <div className="pl-2 pr-0.5">{props.name}</div>
         <div onClick={props.closeTab}><X className="h-[14px] cursor-pointer" /></div>
-        {props.isActive && <div className="absolute left-[5px] right-[5px] bottom-0 h-[2px] bg-primary"/>}
+        {props.isActive && <div className="absolute left-[5px] right-[5px] bottom-[-1px] h-[2px] bg-primary"/>}
       </div>
       <Separator className="h-[45%]" orientation="vertical" />
     </>
   );
-  // <div className="w-[1px] h-[45%] bg-border brightness-70" />
 };
 
 interface TabsProps {}
