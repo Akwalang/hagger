@@ -50,9 +50,9 @@ const KeyValueItem: React.FC<KeyValueItemProps> = (props) => {
       <div className="flex justify-center">
         {props.edit?.includes('active') && <Checkbox className="block my-[5px]" disabled={props.item.isRequired} checked={props.item.active} />}
       </div>
-      <textarea key={props.item.key} ref={(tag) => ref.current[0] = tag} {...taProps} defaultValue={props.item.key} />
-      <textarea key={props.item.value} ref={(tag) => ref.current[1] = tag} {...taProps} defaultValue={props.item.value} />
-      <textarea key={props.item.description} ref={(tag) => ref.current[2] = tag} {...taProps} defaultValue={props.item.description} />
+      <textarea key={'k' + props.item.key} ref={(tag) => ref.current[0] = tag} {...taProps} defaultValue={props.item.key} />
+      <textarea key={'v' + props.item.key} ref={(tag) => ref.current[1] = tag} {...taProps} defaultValue={props.item.value} />
+      <textarea key={'d' + props.item.key} ref={(tag) => ref.current[2] = tag} {...taProps} defaultValue={props.item.description} />
     </>
   );
 };

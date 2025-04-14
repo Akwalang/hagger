@@ -32,7 +32,7 @@ const mergePathParams = (
     let cur = dict.get(key);
 
     if (!cur && unpaired.length === 1) {
-      cur = { ...dict.get(unpaired[0]), key } as RequestParameter;
+      cur = { ...dict.get(unpaired.pop()!), key } as RequestParameter;
     }
 
     cur ||= createParameter(key, '', true);
