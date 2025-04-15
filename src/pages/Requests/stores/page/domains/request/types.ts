@@ -1,13 +1,9 @@
 import { HttpMethod } from '@/global/enums/http-method.enum';
 import { HttpCode } from '@/global/enums/http-codes.enum';
 
-export type RequestParameter = {
-  active: boolean,
-  key: string,
-  value: string,
-  description: string,
-  isRequired: boolean,
-};
+import { KeyValueItem } from '@/views/components';
+
+export type RequestParameter = KeyValueItem;
 
 export type RequestCookie = {};
 

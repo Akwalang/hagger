@@ -19,32 +19,108 @@ const createMockPage = (id: string, name: string): RequestPage => ({
     sourceId: null,
     request: {
       method: HttpMethod.Post,
-      url: 'https://glitchgallery.org/support/:id/:slug?sort=asc&limit=10',
+      url: 'https://glitchgallery.org/support/:id/:slug?sort=asc&limit=10&offset=0',
       headers: [
         {
-          active: true,
-          key: 'Content-Type',
-          value: 'application/json',
-          description: 'The MIME type of the body of the request (used with POST and PUT requests)',
+          isPinned: false,
+          isRemovable: true,
           isRequired: false,
+          isNullable: false,
+          isValid: true,
+
+          active: [true, true],
+          key: ['Content-Type', true],
+          value: ['application/json', true],
+          description: ['The MIME type of the body of the request (used with POST and PUT requests)', true],
         },
         {
-          active: true,
-          key: 'Authorization',
-          value: 'Bearer token',
-          description: 'The authorization token for the request',
+          isPinned: false,
+          isRemovable: true,
           isRequired: false,
+          isNullable: false,
+          isValid: true,
+
+          active: [true, true],
+          key: ['Authorization', true],
+          value: ['Bearer token', true],
+          description: ['The authorization token for the request', true],
         },
       ],
       cookies: [],
       params: {
         path: [
-          { active: true, key: 'id', value: '123', description: 'The ID of the item', isRequired: true },
-          { active: true, key: 'slug', value: 'example-slug', description: 'The slug of the item', isRequired: true }
+          {
+            isPinned: true,
+            isRemovable: false,
+            isRequired: true,
+            isNullable: false,
+            isValid: true,
+
+            active: [true, false],
+            key: ['id', false],
+            value: ['123', true],
+            description: ['The ID of the item', true],
+
+            example: '12345678-1234-1234-1234-123456789abc',
+          },
+          {
+            isPinned: true,
+            isRemovable: false,
+            isRequired: true,
+            isNullable: false,
+            isValid: true,
+
+            active: [true, false],
+            key: ['slug', false],
+            value: ['example-slug', true],
+            description: ['The slug of the item', true],
+
+            example: '931b7ed1f478',
+          },
         ],
         query: [
-          { active: true, key: 'sort', value: 'asc', description: 'Sort order', isRequired: false },
-          { active: true, key: 'limit', value: '10', description: 'Number of items to return', isRequired: false }
+          {
+            isPinned: true,
+            isRemovable: true,
+            isRequired: false,
+            isNullable: false,
+            isValid: true,
+
+            active: [true, true],
+            key: ['sort', true],
+            value: ['asc', true],
+            description: ['Sort order', true],
+
+            example: 'desc',
+          },
+          {
+            isPinned: true,
+            isRemovable: true,
+            isRequired: false,
+            isNullable: false,
+            isValid: true,
+
+            active: [true, true],
+            key: ['limit', true],
+            value: ['10', true],
+            description: ['Number of items to return', true],
+
+            example: '10',
+          },
+          {
+            isPinned: true,
+            isRemovable: true,
+            isRequired: false,
+            isNullable: false,
+            isValid: true,
+
+            active: [true, true],
+            key: ['offset', true],
+            value: ['0', true],
+            description: ['Number of items to skip', true],
+
+            example: '30',
+          },
         ],
       },
       body: null,

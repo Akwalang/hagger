@@ -62,8 +62,8 @@ export const parse = (url: string): Anatomy => {
   return { protocol, auth, host, port, path, search, hash };
 };
 
-export const parseSearch = (search: string | null): Record<string, string> => {
-  const params: Record<string, string> = {};
+export const parseSearch = (search: string | null): [string, string][] => {
+  const params: [string, string][] = [];
 
   if (!search) return params;
 
@@ -73,7 +73,7 @@ export const parseSearch = (search: string | null): Record<string, string> => {
     const key = idx !== -1 ? param.slice(0, idx) : param;
     const value = idx !== -1 ? param.slice(idx + 1) : '';
 
-    params[decodeURIComponent(key)] = decodeURIComponent(value);
+    params.push([key, value]);
   });
 
   return params;

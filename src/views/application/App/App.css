@@ -188,6 +188,10 @@ button {
   cursor: pointer;
 }
 
+button[disabled] {
+  cursor: default;
+}
+
 #greet-input {
   margin-right: 5px;
 }

@@ -15,7 +15,7 @@ export const RequestSettings: React.FC<RequestSettingsProps> = memo((props) => {
 
   const tabs = [
     { name: lang.params.name(), value: 'params', content: () => <Params {...props.request.params} /> },
-    { name: lang.headers.name(), value: 'headers', content: () => <Headers /> },
+    { name: lang.headers.name(), value: 'headers', content: () => <Headers headers={props.request.headers} /> },
   ];
 
   return (

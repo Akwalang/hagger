@@ -15,12 +15,12 @@ export const Params: React.FC<ParamsProp> = (props) => {
       { !!props.path.length &&
         <div className="mb-2">
           <h4 className="mb-2 text-sm">{lang.pathVariablesTitle()}</h4>
-          <Form.KeyValueEditor items={props.path} edit={['value']} />
+          <Form.KeyValueEditor items={props.path} />
         </div>
       }
       <div>
         <h4 className="mb-2 text-sm">{lang.queryParamsTitle()}</h4>
-        <Form.KeyValueEditor items={props.query} edit={['active', 'key', 'value']} />
+        <Form.KeyValueEditor items={props.query} />
       </div>
     </div>
   );
