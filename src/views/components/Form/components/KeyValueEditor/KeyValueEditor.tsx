@@ -5,6 +5,8 @@ import { Checkbox } from "@/views/ui/checkbox"
 import { useLang } from '@/global/hooks/useLang';
 import { cn } from "@/utils/react";
 
+import { ContentEditable } from "../ContentEditable/ContentEditable";
+
 export type KeyValueItem = {
   isPinned: boolean;
   isRemovable: boolean;
@@ -33,43 +35,40 @@ export type KeyValueItem = {
 
 interface KeyValueItemProps {
   item: KeyValueItem;
+  onChange: (update: KeyValueItem) => void;
 }
 
-type TextareaRef = HTMLTextAreaElement | null;
-
 const KeyValueItem: React.FC<KeyValueItemProps> = (props) => {
-  const ref = useRef<[TextareaRef, TextareaRef, TextareaRef]>([null, null, null]);
-
-  const adjustHeight = () => {
-    const heights = [0, 0, 0];
-
-    for (let i = 0; i < ref.current.length; i++) {
-      const height = ref.current[i]?.style.height || ref.current[i]?.clientHeight + 'px';
-      ref.current[i]!.style.height = '1px';
-      heights[i] = ref.current[i]!.scrollHeight + 2;
-      ref.current[i]!.style.height = height;
-    }
-
-    const max = Math.max(...heights);
-
-    ref.current.forEach((tag) => tag!.style.height = max + 'px');
-  };
-
-  const taProps = {
-    className: "resize-none focus:outline-0 focus:relative focus:border-primary overflow-hidden",
-    onChange: adjustHeight,
-  };
-
-  useEffect(adjustHeight, [props.item.key, props.item.value, props.item.description]);
+  const className = "[&>*]:first:px-2 [&>*]:first:py-1.5";
 
   return (
     <>
-      <div className="flex justify-center">
+      <div className="px-2 py-1 flex justify-center">
         <Checkbox className="block my-[5px]" checked={props.item.active[0]} disabled={!props.item.active[1]} />
       </div>
-      <textarea key={'k' + props.item.key[0]} ref={(tag) => ref.current[0] = tag} {...taProps} defaultValue={props.item.key[0]} disabled={!props.item.key[1]} />
-      <textarea key={'v' + props.item.value[0]} ref={(tag) => ref.current[1] = tag} {...taProps} defaultValue={props.item.value[0]} disabled={!props.item.value[1]} placeholder={props.item.example || ''} />
-      <textarea key={'d' + props.item.key[0]} ref={(tag) => ref.current[2] = tag} {...taProps} defaultValue={props.item.description[0]} disabled={!props.item.description[1]} />
+      <ContentEditable
+        key={'k' + props.item.key[0]}
+        className={className}
+        value={props.item.key[0]}
+        disabled={!props.item.key[1]}
+        onChange={(value) => console.log("Key:", value)}
+      />
+      <ContentEditable
+        key={'v' + props.item.value[0]}
+        className={className}
+        value={props.item.value[0]}
+        disabled={!props.item.value[1]}
+        placeholder={props.item.example || ''}
+        onChange={(value) => console.log("Value:", value)}
+        options={['red', 'green', 'blue', 'black', 'white', 'yellow', 'orange', 'purple', 'pink']}
+      />
+      <ContentEditable
+        key={'d' + props.item.key[0]}
+        className={className}
+        value={props.item.description[0]}
+        disabled={!props.item.description[1]}
+        onChange={(value) => console.log("Description", value)}
+      />
     </>
   );
 };
@@ -77,6 +76,7 @@ const KeyValueItem: React.FC<KeyValueItemProps> = (props) => {
 interface KeyValueEditorProps {
   items: KeyValueItem[];
   edit?: (keyof KeyValueItem)[];
+  onChange?: (idx: number, update: KeyValueItem) => void;
 }
 
 export const KeyValueEditor: React.FC<KeyValueEditorProps> = (props) => {
@@ -84,18 +84,18 @@ export const KeyValueEditor: React.FC<KeyValueEditorProps> = (props) => {
 
   const rootClassName = cn(
     "grid gap-0 grid-cols-[32px_4fr_7fr_12fr]",
-    "font-light text-left text-[0.85rem] pt-[1px] pl-[1px]",
-    "[&>*]:px-2 [&>*]:py-1 [&>*]:border-[1px] [&>*]:ml-[-1px] [&>*]:mt-[-1px]",
+    "font-light text-left text-[0.85rem]/[1.45rem] pt-[1px] pl-[1px]",
+    "[&>*]:border-[1px] [&>*]:ml-[-1px] [&>*]:mt-[-1px]",
   );
 
   return (
     <div className={rootClassName}>
       <div />
-      <div className="font-normal">{lang.columns.key()}</div>
-      <div className="font-normal">{lang.columns.value()}</div>
-      <div className="font-normal">{lang.columns.description()}</div>
+      <div className="px-2 py-1 font-normal">{lang.columns.key()}</div>
+      <div className="px-2 py-1 font-normal">{lang.columns.value()}</div>
+      <div className="px-2 py-1 font-normal">{lang.columns.description()}</div>
 
-      {props.items.map((item, i) => <KeyValueItem key={'i' + i} item={item} />)}
+      {props.items.map((item, i) => <KeyValueItem key={'i' + i} item={item} onChange={props.onChange(i)} />)}
     </div>
   );
 };
