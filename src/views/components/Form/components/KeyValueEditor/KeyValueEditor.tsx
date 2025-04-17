@@ -82,18 +82,16 @@ interface KeyValueEditorProps {
 export const KeyValueEditor: React.FC<KeyValueEditorProps> = (props) => {
   const lang = useLang((store) => store.components.form.keyValueEditor);
 
-  const rootClassName = cn(
-    "grid gap-0 grid-cols-[32px_4fr_7fr_12fr]",
-    "font-light text-left text-[0.85rem]/[1.45rem] pt-[1px] pl-[1px]",
-    "[&>*]:ml-[-1px] [&>*]:mt-[-1px]",
-  );
-
   return (
-    <div className={rootClassName}>
-      <div />
-      <div className="px-2 py-1 font-normal">{lang.columns.key()}</div>
-      <div className="px-2 py-1 font-normal">{lang.columns.value()}</div>
-      <div className="px-2 py-1 font-normal">{lang.columns.description()}</div>
+    <div className={cn(
+      "grid gap-0 grid-cols-[32px_4fr_7fr_12fr]",
+      "font-light text-left text-[0.85rem]/[1.45rem] pt-[1px] pl-[1px]",
+      "[&>*]:ml-[-1px] [&>*]:mt-[-1px]",
+    )}>
+      <div className="border-[1px]" />
+      <div className="px-2 py-1.5 font-semibold border-[1px]">{lang.columns.key()}</div>
+      <div className="px-2 py-1.5 font-semibold border-[1px]">{lang.columns.value()}</div>
+      <div className="px-2 py-1.5 font-semibold border-[1px]">{lang.columns.description()}</div>
 
       {props.items.map((item, i) => <KeyValueItem key={'i' + i} item={item} onChange={props.onChange(i)} />)}
     </div>
