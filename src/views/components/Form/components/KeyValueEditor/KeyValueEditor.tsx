@@ -39,23 +39,23 @@ interface KeyValueItemProps {
 }
 
 const KeyValueItem: React.FC<KeyValueItemProps> = (props) => {
-  const className = "[&>*]:first:px-2 [&>*]:first:py-1.5";
+  const fieldClassName = "px-2 py-1.5 border-[1px]";
 
   return (
     <>
-      <div className="px-2 py-1 flex justify-center">
+      <div className="px-2 py-1 flex justify-center border-[1px]">
         <Checkbox className="block my-[5px]" checked={props.item.active[0]} disabled={!props.item.active[1]} />
       </div>
       <ContentEditable
         key={'k' + props.item.key[0]}
-        className={className}
+        fieldClassName={fieldClassName}
         value={props.item.key[0]}
         disabled={!props.item.key[1]}
         onChange={(value) => console.log("Key:", value)}
       />
       <ContentEditable
         key={'v' + props.item.value[0]}
-        className={className}
+        fieldClassName={fieldClassName}
         value={props.item.value[0]}
         disabled={!props.item.value[1]}
         placeholder={props.item.example || ''}
@@ -64,7 +64,7 @@ const KeyValueItem: React.FC<KeyValueItemProps> = (props) => {
       />
       <ContentEditable
         key={'d' + props.item.key[0]}
-        className={className}
+        fieldClassName={fieldClassName}
         value={props.item.description[0]}
         disabled={!props.item.description[1]}
         onChange={(value) => console.log("Description", value)}
@@ -85,7 +85,7 @@ export const KeyValueEditor: React.FC<KeyValueEditorProps> = (props) => {
   const rootClassName = cn(
     "grid gap-0 grid-cols-[32px_4fr_7fr_12fr]",
     "font-light text-left text-[0.85rem]/[1.45rem] pt-[1px] pl-[1px]",
-    "[&>*]:border-[1px] [&>*]:ml-[-1px] [&>*]:mt-[-1px]",
+    "[&>*]:ml-[-1px] [&>*]:mt-[-1px]",
   );
 
   return (

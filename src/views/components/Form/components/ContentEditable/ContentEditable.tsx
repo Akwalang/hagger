@@ -6,6 +6,7 @@ import { empower } from "./utils/empower.utils";
 
 interface ContentEditableProps {
   className?: string;
+  fieldClassName?: string;
   value: string;
   placeholder?: string;
   options?: string[];
@@ -22,13 +23,11 @@ export const ContentEditable: React.FC<ContentEditableProps> = (props) => {
   const onChange = (value: string) => {
     props.onChange?.(value.trim());
     setValue(value);
-    field.current!.textContent = value;
   };
 
   const onSelect = (value: string) => {
-    onChange(value);
-    setValue(value);
     field.current!.textContent = value;
+    setValue(value);
   };
 
   useEffect(() => empower(field.current!), []);
@@ -37,9 +36,12 @@ export const ContentEditable: React.FC<ContentEditableProps> = (props) => {
     <div className={cn("relative", props.className)}>
       <div
         ref={field}
-        className="w-full h-full px-2 py-1 break-all cursor-text focus:outline-0 focus:relative focus:border-primary"
+        className={cn(
+          props.fieldClassName,
+          "w-full h-full break-all cursor-text",
+          "focus:outline-0 focus:relative focus:border-primary focus:z-1",
+        )}
         contentEditable={!props.disabled}
-        role="textbox"
         suppressContentEditableWarning={true}
         onInput={() => onChange(field.current!.textContent ?? "")}
       >

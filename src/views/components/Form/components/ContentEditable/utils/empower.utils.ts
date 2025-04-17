@@ -27,21 +27,30 @@ const insertTextAtCursor = (text: string) => {
 
 export const empower = (element: HTMLDivElement): () => void => {
   const handleEnter = (event: KeyboardEvent) => {
+    // console.log('Before:', element.innerHTML);
+
     if (event.key === "Enter") {
       event.preventDefault();
 
-      let value = element.innerHTML.endsWith("<br>") ? "\n" : "\n\n";
+      const html = element.innerHTML;
+
+      let value = (() => {
+        if (html === "<br>") return "\n";
+        if (html.endsWith("<br>")) return "\n";
+
+        return "\n\n";
+      })();
 
       insertTextAtCursor(value);
     }
+
+    // console.log('After:', element.innerHTML);
   };
 
   const handlePaste = (event: ClipboardEvent) => {
     event.preventDefault();
-
-    insertTextAtCursor(
-      event.clipboardData?.getData("text/plain") ?? "",
-    );
+    const text = event.clipboardData?.getData("text/plain") ?? "";
+    insertTextAtCursor(text);
   };
 
   element.addEventListener("keydown", handleEnter);
