@@ -1,16 +1,9 @@
 import { create } from 'zustand';
 
-import { langs } from '@/global/data/langs';
-
-interface State {
-  lang: keyof typeof langs;
-}
-
-interface Actions {
-  setLang: (lang: keyof typeof langs) => void;
-}
+import { State } from './state';
+import { Actions } from './actions';
 
 export const useLangStore = create<State & Actions>((set) => ({
-  lang: 'by',
-  setLang: (lang) => set(() => ({ lang })),
+  ...State(),
+  ...Actions(set),
 }));

@@ -1,4 +1,9 @@
+import { LangCode } from './enums';
+import { type LangType } from './_';
+
 import { en } from './en';
 import { by } from './by';
 
-export const langs = { en, by } as const;
+export { LangCode } from './enums';
+
+export const langs: Record<LangCode, LangType> = { en, by };

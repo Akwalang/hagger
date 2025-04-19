@@ -1,6 +1,6 @@
 import { Languages, Check } from 'lucide-react';
 
-import { langs } from '@/global/data/langs';
+import { langs, LangCode } from '@/global/data/langs';
 import { useLang } from '@/global/hooks';
 import { useLangStore } from '@/global/stores/lang/lang.store';
 
@@ -12,13 +12,13 @@ interface LangSwitcherProps {}
 const Options: React.FC<{ cur: string }> = (props) => {
   const setLang = useLangStore((state) => state.setLang);
 
-  return Object.entries(langs).map(([key, lang]) => {
-    const name = lang.settings.lang.name();
+  return Object.values(LangCode).map((key) => {
+    const lang = langs[key];
 
     return (
-      <Base.DropdownMenuItem key={key} onClick={() => setLang(key as any)}>
+      <Base.DropdownMenuItem key={key} onClick={() => setLang(key)}>
         <div className="w-full flex items-center justify-between">
-          <span>{name}</span>
+          <span>{lang.settings.lang.name()}</span>
           <span>{props.cur === key && <Check size="16" />}</span>
         </div>
       </Base.DropdownMenuItem>
