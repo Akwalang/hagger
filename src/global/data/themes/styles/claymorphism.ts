@@ -79,4 +79,4 @@ export const styles = {
     --sidebar-ring: #818cf8;
     --shadow-color: hsl(0 0% 0%);
   `,
-};
+} as const;

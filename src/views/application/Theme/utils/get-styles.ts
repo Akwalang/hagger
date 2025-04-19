@@ -1,17 +1,16 @@
-import { type Theme, themes } from "@/global/data/themes";
-import { ThemeMode } from "@/global/stores/theme/enums";
+import { ThemeName, ThemeMode, ThemeItem, themes } from "@/global/data/themes";
 
 export const getStyles = (
   type: ThemeMode,
-  name: string,
-  fallback: string,
+  name: ThemeName,
+  fallback: ThemeName,
 ): string => {
-  let theme: Theme | undefined;
+  let theme: ThemeItem | null = null;
 
-  theme ||= themes.find((item) => item.name === name);
-  theme ||= themes.find((item) => item.name === fallback);
+  theme ||= themes[name];
+  theme ||= themes[fallback];
 
   if (!theme) return '';
 
-  return `:root {${theme.css[type as any]}}`;
+  return `:root {${theme.styles[type]}}`;
 }

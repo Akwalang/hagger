@@ -1,8 +1,8 @@
 import { Sun, Moon, Paintbrush, Check, ArrowRightFromLine } from 'lucide-react';
 
-import { themes } from '@/global/data/themes';
+import { themes, ThemeName } from '@/global/data/themes';
 
-import { useThemeStore } from '@/global/stores/theme/theme.store';
+import { useThemeStore } from '@/global/stores/theme';
 
 import * as Base from '@/views/ui/dropdown-menu';
 import { Button } from '@/views/ui/button';
@@ -12,11 +12,13 @@ interface ThemeSwitcherProps {}
 const Options: React.FC<{ cur: string }> = (props) => {
   const setTheme = useThemeStore((state) => state.setTheme);
 
-  return themes.map(({ name, label }) => {
+  return Object.values(ThemeName).map((name) => {
+    const theme = themes[name];
+
     return (
       <Base.DropdownMenuItem key={name} onClick={() => setTheme(name)}>
         <div className="w-full flex items-center justify-between">
-          <span>{label}</span>
+          <span>{theme.label}</span>
           <span>{props.cur === name && <Check size="16" />}</span>
         </div>
       </Base.DropdownMenuItem>
@@ -27,7 +29,7 @@ const Options: React.FC<{ cur: string }> = (props) => {
 export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = () => {
   const { mode, theme, toggleMode, nextTheme } = useThemeStore((state) => state);
 
-  const selected = themes.find((item) => item.name === theme) || { label: 'Unknown' };
+  const selected = themes[theme] || { label: 'Unknown' };
 
   const ModeIcon = mode === 'dark' ? Moon : Sun;
 

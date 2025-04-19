@@ -87,4 +87,4 @@ export const styles = {
     --shadow-offset-x: 1px;
     --shadow-offset-y: 1px;
   `,
-};
+} as const;

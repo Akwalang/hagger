@@ -81,4 +81,4 @@ export const styles = {
     --font-mono: Space Mono, monospace;
     --shadow-color: hsl(300 80% 50% / 0.25);
   `,
-};
+} as const;

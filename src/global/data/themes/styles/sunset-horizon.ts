@@ -78,4 +78,4 @@ export const styles = {
     --sidebar-border: #463a41;
     --sidebar-ring: #ff7e5f;
   `,
-};
+} as const;
