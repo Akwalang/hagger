@@ -1,8 +1,26 @@
-import { State } from "./interfaces";
+import { EnvironmentState } from "./slices/environment/state";
+import { GroupState } from "./slices/group/state";
+import { PageState } from "./slices/page/state";
 
-import { mockGroups } from "./mock";
+export type State =
+  & EnvironmentState
+  & GroupState
+  & PageState;
 
-export const state: State = {
-  groups: mockGroups,
-  activeGroupId: mockGroups[0].id,
-} as const;
+export const State = (): State => {
+  const ids = {
+    environment: crypto.randomUUID(),
+    group: crypto.randomUUID(),
+    pages: [
+      crypto.randomUUID(),
+      crypto.randomUUID(),
+      crypto.randomUUID(),
+    ],
+  };
+
+  return {
+    ...EnvironmentState(ids),
+    ...GroupState(ids),
+    ...PageState(ids),
+  } as const;
+};

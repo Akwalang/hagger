@@ -1,3 +1,5 @@
+import { useUiStore } from "@/global/stores/ui";
+
 import * as BaseRS from "@/views/ui/resizable";
 
 import { RequestMain } from '../../components/RequestMain/RequestMain';
@@ -5,7 +7,6 @@ import { RequestSettings } from '../../components/RequestSettings/RequestSetting
 import { Response } from '../../components/Response/Response';
 
 import { usePageStore } from "../../stores/page";
-import { useUiStore } from "../../stores/ui";
 
 import { getActivePage } from "../../stores/page/selectors";
 

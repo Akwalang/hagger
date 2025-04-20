@@ -1,9 +1,9 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
-import { state } from './state';
-import { actions } from './actions';
+import { State } from "./state";
+import { Actions } from "./actions";
 
-export const usePageStore = create<typeof state & ReturnType<typeof actions>>((set) => ({
-  ...state,
-  ...actions(set),
+export const usePageStore = create<State & Actions>((set) => ({
+  ...State(),
+  ...Actions(set),
 }));

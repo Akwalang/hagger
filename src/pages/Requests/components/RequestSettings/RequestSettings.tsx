@@ -4,11 +4,11 @@ import { Tabs } from '@/views/components';
 import { Params } from './components/Params/Params';
 import { Headers } from './components/Headers/Headers';
 
-import { Request } from '../../stores/page/domains/request/types';
+import { PageRequest } from '../../stores/page/slices/page-request/types';
 
 import { useLang } from '@/global/hooks';
 
-interface RequestSettingsProps extends Request {}
+interface RequestSettingsProps extends PageRequest {}
 
 export const RequestSettings: React.FC<RequestSettingsProps> = memo((props) => {
   const lang = useLang((store) => store.pages.requests.requestSettings.tabs);

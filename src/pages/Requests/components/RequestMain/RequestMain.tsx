@@ -8,10 +8,10 @@ import { HttpMethod } from '@/global/enums/http-method.enum';
 
 import { cn } from '@/utils/react';
 
-import { Request } from '../../stores/page/domains/request/types';
+import { PageRequest } from '../../stores/page/slices/page-request/types';
 import { usePageStore } from '../../stores/page';
 
-interface RequestMainProps extends Request {}
+interface RequestMainProps extends PageRequest {}
 
 const methods = Object.values(HttpMethod).map((value) => (
   { name: value.toUpperCase(), value }
@@ -43,7 +43,7 @@ export const RequestMain: React.FC<RequestMainProps> = memo((props) => {
       </div>
 
       <div className="flex gap-2">
-        <Form.Select className="min-w-[110px] max-w-[110px] text-center" value={request.method} items={methods} onChange={changeRequestMethod}  />
+        <Form.Select className="min-w-[110px] max-w-[110px] text-center" value={request.method} items={methods} onChange={(method) => changeRequestMethod(method as HttpMethod)}  />
         <Form.Input className="grow" value={request.url} onChange={onInputChange} placeholder={lang.urlPlaceholder()} />
         <div className="relative flex">
           <Form.Button type="submit">{lang.sendButton()}</Form.Button>

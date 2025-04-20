@@ -1,7 +1,7 @@
 import { ThemeState } from "./slices/theme/state";
 
 export type State =
-  | ThemeState;
+  & ThemeState;
 
 export const State = (): State => ({
   ...ThemeState(),

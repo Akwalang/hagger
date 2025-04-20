@@ -1,6 +1,16 @@
-import { State } from "../interfaces";
-import { Group } from "../types";
+import { Group } from "../slices/group/state";
+import { State } from "../state";
+
+import { getActiveEnvironment } from "./get-active-environment.selector";
 
 export const getActiveGroup = (state: State): Group => {
-  return state.groups.find((g) => g.id === state.activeGroupId)!;
+  const environment = getActiveEnvironment(state);
+
+  const group = state.groups[environment.activeGroupId];
+
+  if (!group) {
+    throw new Error(`Group does not exist: id=${environment.activeGroupId}`);
+  }
+
+  return group;
 };

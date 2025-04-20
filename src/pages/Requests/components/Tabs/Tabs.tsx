@@ -3,11 +3,10 @@ import { X } from 'lucide-react';
 
 import { Separator } from '@/views/ui/separator';
 
-import { createDict } from '@/utils/array';
 import { cn } from '@/utils/react';
 
 import { usePageStore } from '../../stores/page';
-import { getActiveGroup, getTabs } from '../../stores/page/selectors';
+import { getActiveGroup } from '../../stores/page/selectors';
 
 interface TabProps {
   name: string;
@@ -32,35 +31,32 @@ const Tab: React.FC<TabProps> = (props) => {
 interface TabsProps {}
 
 export const Tabs: React.FC<TabsProps> = () => {
-  const { activePageId, tabs, pages } = usePageStore(getActiveGroup);
+  const group = usePageStore(getActiveGroup);
+  const pages = usePageStore((state) => state.pages);
 
-  const closeTab = usePageStore((state) => state.closeTab);
+  const closePage = usePageStore((state) => state.closePage);
   const setActivePage = usePageStore((state) => state.setActivePage);
 
-  const dict = createDict(pages, 'id');
-
-  const children = tabs.map((tab) => {
-    const page = dict.get(tab.pageId);
-
+  const tabs = group.pageIds.map((id) => {
     const props = {
-      name: page!.name,
-      isActive: tab.pageId === activePageId,
+      name: pages[id].name,
+      isActive: id === group.activePageId,
       setActivePage: (event: MouseEvent) => {
         event.stopPropagation();
-        setActivePage(tab.pageId);
+        setActivePage(id);
       },
       closeTab: (event: MouseEvent) => {
         event.stopPropagation();
-        closeTab(tab.pageId);
+        closePage(id);
       },
     };
 
-    return <Tab key={tab.pageId} {...props} />;
+    return <Tab key={id} {...props} />;
   });
 
   return (
     <div className="w-full h-[36px] flex items-center">
-      {children}
+      {tabs}
     </div>
   );
 };

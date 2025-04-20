@@ -1,10 +1,10 @@
+import { useUiStore } from "@/global/stores/ui";
+
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/views/ui/resizable";
-
-import { useUiStore } from "../../stores/ui";
 
 interface MainLayoutProps {
   collection: React.ReactNode;

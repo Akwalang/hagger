@@ -1,4 +1,4 @@
-import { DemoPage, RequestsPage } from '@/pages';
+import { RequestsPage } from '@/pages';
 
 import { MainLayout } from "@/views/layouts/MainLayout/MainLayout";
 

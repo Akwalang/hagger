@@ -1,10 +1,13 @@
-import { State } from "../interfaces";
-import { CommonPage } from "../types";
+import { State } from "../state";
+
+import { PageWithData } from "../slices/page/state";
 
 import { getActiveGroup } from './get-active-group.selector';
 
-export const getActivePage = (state: State): CommonPage | null => {
+export const getActivePage = (state: State): PageWithData | null => {
   const group = getActiveGroup(state);
 
-  return group.pages.find((p) => p.id === group.activePageId) || null;
+  if (group.activePageId === null) return null;
+
+  return state.pages[group.activePageId];
 };

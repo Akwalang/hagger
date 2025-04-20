@@ -58,7 +58,7 @@ export const ContentEditable: React.FC<ContentEditableProps> = (props) => {
           <div className={cn(
             props.fieldClassName,
             "absolute top-0 left-0 w-full h-full pointer-events-none",
-            value === '' || value === '<br>' ? "text-muted-foreground" : "text-transparent",
+            value === '' || value === '<br>' ? "text-foreground/40" : "text-transparent",
           )}>
             {props.placeholder}
           </div>
