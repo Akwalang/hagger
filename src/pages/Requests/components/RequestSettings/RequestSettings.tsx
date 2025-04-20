@@ -1,12 +1,13 @@
 import { memo } from 'react';
+
+import { PageRequest } from '@/global/stores/workspace/slices/page-request/types';
+
+import { useLang } from '@/global/hooks';
+
 import { Tabs } from '@/views/components';
 
 import { Params } from './components/Params/Params';
 import { Headers } from './components/Headers/Headers';
-
-import { PageRequest } from '../../stores/page/slices/page-request/types';
-
-import { useLang } from '@/global/hooks';
 
 interface RequestSettingsProps extends PageRequest {}
 

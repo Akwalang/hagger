@@ -1,12 +1,12 @@
 import { MouseEvent } from 'react';
 import { X } from 'lucide-react';
 
+import { usePageStore } from '@/global/stores/workspace';
+import { getActiveGroup } from '@/global/stores/workspace/selectors';
+
 import { Separator } from '@/views/ui/separator';
 
 import { cn } from '@/utils/react';
-
-import { usePageStore } from '../../stores/page';
-import { getActiveGroup } from '../../stores/page/selectors';
 
 interface TabProps {
   name: string;

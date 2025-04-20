@@ -1,14 +1,13 @@
 import { useUiStore } from "@/global/stores/ui";
 
+import { usePageStore } from "@/global/stores/workspace";
+import { getActivePage } from "@/global/stores/workspace/selectors";
+
 import * as BaseRS from "@/views/ui/resizable";
 
 import { RequestMain } from '../../components/RequestMain/RequestMain';
 import { RequestSettings } from '../../components/RequestSettings/RequestSettings';
 import { Response } from '../../components/Response/Response';
-
-import { usePageStore } from "../../stores/page";
-
-import { getActivePage } from "../../stores/page/selectors";
 
 interface RequestLayoutProps {}
 

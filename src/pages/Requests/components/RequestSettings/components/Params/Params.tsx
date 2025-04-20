@@ -1,9 +1,9 @@
 import { Form, KeyValueItem } from '@/views/components';
 
-import { usePageStore } from '@/pages/Requests/stores/page';
+import { usePageStore } from '@/global/stores/workspace';
 import { useLang } from '@/global/hooks/useLang';
 import { curry } from '@/utils/functions';
-import { RequestParamsType } from '@/pages/Requests/stores/page/slices/page-request/enums';
+import { RequestParamsType } from '@/global/stores/workspace/slices/page-request/enums';
 
 interface ParamsProp {
   path: KeyValueItem[];
