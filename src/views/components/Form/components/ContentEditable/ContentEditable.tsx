@@ -38,11 +38,17 @@ export const ContentEditable: React.FC<ContentEditableProps> = (props) => {
 
     setValue(value);
     setSuggestions(list);
-    setIsOpen(!!value && !!list.length);
+    setIsOpen(!!list.length);
+  };
+
+  const onFocus = () => {
+    setIsOpen(!!suggestions.length);
   };
 
   const onSelect = (value: string) => {
     field.current!.textContent = value;
+
+    props.onChange?.(value.trim());
 
     setValue(value);
     setSuggestions([]);
@@ -68,14 +74,14 @@ export const ContentEditable: React.FC<ContentEditableProps> = (props) => {
           ref={field}
           className={cn(
             props.fieldClassName,
-            "w-full h-full break-all cursor-text",
+            "w-full h-full cursor-text",
             "focus:outline-0 focus:relative focus:border-primary focus:z-1",
           )}
           data-placeholder={props.placeholder}
           contentEditable={!props.disabled}
           suppressContentEditableWarning={true}
           onInput={() => onChange(field.current!.textContent ?? "")}
-          onFocus={() => onChange(field.current!.textContent ?? "")}
+          onFocus={() => onFocus()}
         >
           {props.value}
         </div>

@@ -48,14 +48,14 @@ const KeyValueItem: React.FC<KeyValueItemProps> = (props) => {
       </div>
       <ContentEditable
         key={'k' + props.item.key[0]}
-        fieldClassName={fieldClassName}
+        fieldClassName={cn(fieldClassName, "break-all")}
         value={props.item.key[0]}
         disabled={!props.item.key[1]}
         onChange={(value) => console.log("Key:", value)}
       />
       <ContentEditable
         key={'v' + props.item.value[0]}
-        fieldClassName={fieldClassName}
+        fieldClassName={cn(fieldClassName, "break-all")}
         value={props.item.value[0]}
         disabled={!props.item.value[1]}
         placeholder={props.item.example || ''}
