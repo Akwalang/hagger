@@ -6,9 +6,9 @@ import { State } from '../../../state';
 import { RequestParamsType } from '../enums';
 import { RequestParameter } from '../types';
 
-import { getActivePage } from '../../../selectors';
+import { getActivePageRequest } from '../../../selectors';
 
-import { updatePage } from '../../page/utils/update-page.utils';
+import { updateActivePage } from '../../page/utils';
 
 const createParameter = (key: string, value: string, type: RequestParamsType): RequestParameter => ({
   isPinned: true,
@@ -112,9 +112,7 @@ const mergeQueryParams = (
 
 export const changeRequestUrl = (set: any) => (url: string) => {
   set((state: State) => {
-    const page = getActivePage(state);
-
-    if (!page) return state;
+    const page = getActivePageRequest(state);
 
     const components = Url.parse(url);
 
@@ -126,6 +124,6 @@ export const changeRequestUrl = (set: any) => (url: string) => {
       query: mergeQueryParams(page.data.request.params.query, query),
     };
 
-    return updatePage(state, { data: { request: { url, params } } });
+    return updateActivePage(state, { data: { request: { url, params } } });
   });
 };

@@ -1,25 +1,21 @@
 import { State } from '../../../state';
-
 import { RequestParameter } from '../types';
-import { RequestParamsType } from '../enums';
 
 import { getActivePageRequest } from '../../../selectors';
+
 import { updateActivePage } from '../../page/utils';
 
-export const changeRequestParams = (set: any) => (
-  type: RequestParamsType,
+export const changeRequestHeaders = (set: any) => (
   idx: number,
   update: Partial<RequestParameter>,
 ): void => {
   set((state: State) => {
     const page = getActivePageRequest(state);
 
-    const list = page.data.request.params[type].map((item, i) => {
+    const headers = page.data.request.headers.map((item, i) => {
       return idx === i ? { ...item, ...update } : item;
     });
 
-    const params = { [type]: list };
-
-    return updateActivePage(state, { data: { request: { params } } });
+    return updateActivePage(state, { data: { request: { headers } } });
   });
 };

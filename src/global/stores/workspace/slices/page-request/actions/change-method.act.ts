@@ -2,7 +2,7 @@ import { HttpMethod } from '@/global/enums/http-method.enum';
 
 import { State } from '../../../state';
 
-import { updatePage } from '../../page/utils/update-page.utils';
+import { updateActivePage } from '../../page/utils';
 
 const values = Object.values(HttpMethod);
 
@@ -12,6 +12,6 @@ export const changeRequestMethod = (set: any) => (method: HttpMethod) => {
   }
 
   set((state: State) => {
-    return updatePage(state, { data: { request: { method } } });
+    return updateActivePage(state, { data: { request: { method } } });
   });
 };

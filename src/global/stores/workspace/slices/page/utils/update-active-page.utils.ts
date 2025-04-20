@@ -4,7 +4,7 @@ import { State } from "../../../state";
 
 import { getActivePage } from "../../../selectors";
 
-export const updatePage = <T extends Record<any, any>>(
+export const updateActivePage = <T extends Record<any, any>>(
   state: State,
   update: T,
 ) => {
