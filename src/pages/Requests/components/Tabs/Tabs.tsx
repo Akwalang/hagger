@@ -18,10 +18,17 @@ interface TabProps {
 const Tab: React.FC<TabProps> = (props) => {
   return (
     <>
-      <div className={cn("relative h-full text-sm flex items-center", props.isActive ? "cursor-default" : "cursor-pointer")} onClick={props.setActivePage}>
-        <div className="pl-2 pr-0.5">{props.name}</div>
+      <div className={cn(
+        "relative h-full text-sm flex items-center",
+        props.isActive && "cursor-default",
+        !props.isActive && "cursor-pointer hover:[&>div:last-child]:opacity-100",
+      )} onClick={props.setActivePage}>
+        <div className="pl-3 pr-0.5">{props.name}</div>
         <div onClick={props.closeTab}><X className="h-[14px] cursor-pointer" /></div>
-        {props.isActive && <div className="absolute left-[5px] right-[5px] bottom-[-1px] h-[2px] bg-primary"/>}
+        <div className={cn(
+          "absolute left-[5px] right-[5px] bottom-[-1px] h-[2px]",
+          props.isActive ? "bg-primary" : "bg-primary/50 opacity-0",
+        )} />
       </div>
       <Separator className="h-[45%]" orientation="vertical" />
     </>
@@ -55,7 +62,7 @@ export const Tabs: React.FC<TabsProps> = () => {
   });
 
   return (
-    <div className="w-full h-[36px] flex items-center">
+    <div className="w-full h-[38px] flex items-center">
       {tabs}
     </div>
   );
