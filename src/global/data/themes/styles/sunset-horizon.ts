@@ -11,7 +11,7 @@ export const styles = {
     --secondary: #ffedea;
     --secondary-foreground: #b35340;
     --muted: #fff0eb;
-    --muted-foreground: #785652;
+    --muted-foreground: #78716C;
     --accent: #feb47b;
     --accent-foreground: #3d3436;
     --destructive: #e63946;

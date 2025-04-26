@@ -13,6 +13,11 @@ export const themes: Record<ThemeName, ThemeItem> = {
     label: "Bold Tech",
     styles: styles[ThemeName.BoldTech],
   },
+  [ThemeName.Bubblegum]: {
+    name: ThemeName.Bubblegum,
+    label: "Bubblegum",
+    styles: styles[ThemeName.Bubblegum],
+  },
   [ThemeName.Caffeine]: {
     name: ThemeName.Caffeine,
     label: "Caffeine",
@@ -22,6 +27,11 @@ export const themes: Record<ThemeName, ThemeItem> = {
     name: ThemeName.Candyland,
     label: "Candyland",
     styles: styles[ThemeName.Candyland],
+  },
+  [ThemeName.Catppuccin]: {
+    name: ThemeName.Catppuccin,
+    label: "Catppuccin",
+    styles: styles[ThemeName.Catppuccin],
   },
   [ThemeName.Claude]: {
     name: ThemeName.Claude,
@@ -53,6 +63,11 @@ export const themes: Record<ThemeName, ThemeItem> = {
     label: "Elegant Luxury",
     styles: styles[ThemeName.ElegantLuxury],
   },
+  [ThemeName.Graphite]: {
+    name: ThemeName.Graphite,
+    label: "Graphite",
+    styles: styles[ThemeName.Graphite],
+  },
   [ThemeName.KodamaGrove]: {
     name: ThemeName.KodamaGrove,
     label: "Kodama Grove",
@@ -63,10 +78,20 @@ export const themes: Record<ThemeName, ThemeItem> = {
     label: "Midnight Bloom",
     styles: styles[ThemeName.MidnightBloom],
   },
+  [ThemeName.MochaMousse]: {
+    name: ThemeName.MochaMousse,
+    label: "Mocha Mousse",
+    styles: styles[ThemeName.MochaMousse],
+  },
   [ThemeName.ModernMinimal]: {
     name: ThemeName.ModernMinimal,
     label: "Modern Minimal",
     styles: styles[ThemeName.ModernMinimal],
+  },
+  [ThemeName.Mono]: {
+    name: ThemeName.Mono,
+    label: "Mono",
+    styles: styles[ThemeName.Mono],
   },
   [ThemeName.Nature]: {
     name: ThemeName.Nature,
@@ -108,10 +133,40 @@ export const themes: Record<ThemeName, ThemeItem> = {
     label: "Retro Arcade",
     styles: styles[ThemeName.RetroArcade],
   },
+  [ThemeName.SolarDusk]: {
+    name: ThemeName.SolarDusk,
+    label: "Solar Dusk",
+    styles: styles[ThemeName.SolarDusk],
+  },
+  [ThemeName.StarryNight]: {
+    name: ThemeName.StarryNight,
+    label: "Starry Night",
+    styles: styles[ThemeName.StarryNight],
+  },
   [ThemeName.SunsetHorizon]: {
     name: ThemeName.SunsetHorizon,
     label: "Sunset Horizon",
     styles: styles[ThemeName.SunsetHorizon],
+  },
+  [ThemeName.T3Chat]: {
+    name: ThemeName.T3Chat,
+    label: "T3 Chat",
+    styles: styles[ThemeName.T3Chat],
+  },
+  [ThemeName.Tangerine]: {
+    name: ThemeName.Tangerine,
+    label: "Tangerine",
+    styles: styles[ThemeName.Tangerine],
+  },
+  [ThemeName.Twitter]: {
+    name: ThemeName.Twitter,
+    label: "Twitter",
+    styles: styles[ThemeName.Twitter],
+  },
+  [ThemeName.Vercel]: {
+    name: ThemeName.Vercel,
+    label: "Vercel",
+    styles: styles[ThemeName.Vercel],
   },
   [ThemeName.VintagePaper]: {
     name: ThemeName.VintagePaper,
