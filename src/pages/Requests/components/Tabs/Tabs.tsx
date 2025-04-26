@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react';
 import { X } from 'lucide-react';
 
-import { usePageStore } from '@/global/stores/workspace';
+import { useWorkspaceStore } from '@/global/stores/workspace';
 import { getActiveGroup } from '@/global/stores/workspace/selectors';
 
 import { Separator } from '@/views/ui/separator';
@@ -31,11 +31,11 @@ const Tab: React.FC<TabProps> = (props) => {
 interface TabsProps {}
 
 export const Tabs: React.FC<TabsProps> = () => {
-  const group = usePageStore(getActiveGroup);
-  const pages = usePageStore((state) => state.pages);
+  const group = useWorkspaceStore(getActiveGroup);
+  const pages = useWorkspaceStore((state) => state.pages);
 
-  const closePage = usePageStore((state) => state.closePage);
-  const setActivePage = usePageStore((state) => state.setActivePage);
+  const closePage = useWorkspaceStore((state) => state.closePage);
+  const setActivePage = useWorkspaceStore((state) => state.setActivePage);
 
   const tabs = group.pageIds.map((id) => {
     const props = {

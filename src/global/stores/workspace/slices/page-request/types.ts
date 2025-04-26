@@ -1,5 +1,4 @@
-import { HttpMethod } from '@/global/enums/http-method.enum';
-import { HttpCode } from '@/global/enums/http-codes.enum';
+import { HttpMethod, HttpCode } from '@/global/data/http';
 
 import { KeyValueItem } from '@/views/components';
 

@@ -6,7 +6,10 @@ import {
   ResizablePanelGroup,
 } from "@/views/ui/resizable";
 
+import { Separator } from "@/views/ui/separator";
+
 interface MainLayoutProps {
+  groups: React.ReactNode;
   collection: React.ReactNode;
   workingArea: React.ReactNode;
 }
@@ -23,6 +26,8 @@ export const MainLayout: React.FC<MainLayoutProps> = (props) => {
       className="items-stretch"
       onLayout={(sizes: number[]) => setCollectionSize(sizes[0])}
     >
+      {props.groups}
+      <Separator orientation="vertical" className="w-[1px] h-full" />
       <ResizablePanel className="h-full" defaultSize={layout[0]} minSize={18} maxSize={30}>
         {props.collection}
       </ResizablePanel>

@@ -1,4 +1,4 @@
-import { HttpMethod } from '@/global/enums/http-method.enum';
+import { HttpMethod } from '@/global/data/http';
 
 import { State } from '../../../state';
 

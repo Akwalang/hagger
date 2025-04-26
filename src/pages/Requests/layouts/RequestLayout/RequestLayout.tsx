@@ -1,6 +1,6 @@
 import { useUiStore } from "@/global/stores/ui";
 
-import { usePageStore } from "@/global/stores/workspace";
+import { useWorkspaceStore } from "@/global/stores/workspace";
 import { getActivePage } from "@/global/stores/workspace/selectors";
 
 import * as BaseRS from "@/views/ui/resizable";
@@ -12,7 +12,7 @@ import { Response } from '../../components/Response/Response';
 interface RequestLayoutProps {}
 
 export const RequestLayout: React.FC<RequestLayoutProps> = () => {
-  const page = usePageStore(getActivePage);
+  const page = useWorkspaceStore(getActivePage);
 
   const size = useUiStore((state) => state.requestSize);
   const setRequestSize = useUiStore((state) => state.setRequestSize);

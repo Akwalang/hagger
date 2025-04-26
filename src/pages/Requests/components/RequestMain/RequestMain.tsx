@@ -2,12 +2,12 @@ import { memo } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 import { PageRequest } from '@/global/stores/workspace/slices/page-request/types';
-import { usePageStore } from '@/global/stores/workspace';
+import { useWorkspaceStore } from '@/global/stores/workspace';
 
 import { Breadcrumb, Form } from '@/views/components';
 
 import { useLang, useInput } from '@/global/hooks';
-import { HttpMethod } from '@/global/enums/http-method.enum';
+import { HttpMethod } from '@/global/data/http';
 
 import { cn } from '@/utils/react';
 
@@ -22,8 +22,8 @@ export const RequestMain: React.FC<RequestMainProps> = memo((props) => {
 
   const lang = useLang((store) => store.pages.requests.requestMain);
 
-  const changeRequestMethod = usePageStore((state) => state.changeRequestMethod);
-  const changeRequestUrl = usePageStore((state) => state.changeRequestUrl);
+  const changeRequestMethod = useWorkspaceStore((state) => state.changeRequestMethod);
+  const changeRequestUrl = useWorkspaceStore((state) => state.changeRequestUrl);
 
   const onInputChange = useInput(changeRequestUrl);
 

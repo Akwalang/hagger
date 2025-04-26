@@ -1,6 +1,6 @@
 import { Form, KeyValueItem } from '@/views/components';
 
-import { usePageStore } from '@/global/stores/workspace';
+import { useWorkspaceStore } from '@/global/stores/workspace';
 import { useLang } from '@/global/hooks/useLang';
 import { curry } from '@/utils/functions';
 import { RequestParamsType } from '@/global/stores/workspace/slices/page-request/enums';
@@ -12,7 +12,7 @@ interface ParamsProp {
 
 export const Params: React.FC<ParamsProp> = (props) => {
   const lang = useLang((store) => store.pages.requests.requestSettings.tabs.params);
-  const changeRequestParams = usePageStore((state) => state.changeRequestParams);
+  const changeRequestParams = useWorkspaceStore((state) => state.changeRequestParams);
 
   return (
     <div className="px-[15px] pb-[15px]">

@@ -26,7 +26,7 @@ export const EnvironmentState = (ids: {
       id: ids.environment,
       name: DEFAULT_ENVIRONMENT_NAME,
       activeGroupId: ids.group,
-      groupIds: [ids.group],
+      groupIds: [ids.group, 'random-1', 'random-2', 'random-3'],
       variables: [],
     },
   },
