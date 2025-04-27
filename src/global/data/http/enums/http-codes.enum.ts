@@ -2,7 +2,7 @@ export const HttpCodeDescription = {
   // 1xx (Informational)
   '100': 'Continue',
   '101': 'Switching Protocols',
-  '102': 'Processing(WebDAV)',
+  '102': 'Processing', // WebDAV
   '103': 'Early Hints',
 
   // 2xx(Success)
@@ -13,8 +13,8 @@ export const HttpCodeDescription = {
   '204': 'No Content',
   '205': 'Reset Content',
   '206': 'Partial Content',
-  '207': 'Multi - Status(WebDAV)',
-  '208': 'Already Reported(WebDAV)',
+  '207': 'Multi - Status', // WebDAV
+  '208': 'Already Reported', // WebDAV
   '226': 'IM Used',
 
   // 3xx(Redirection)
@@ -49,9 +49,9 @@ export const HttpCodeDescription = {
   '417': 'Expectation Failed',
   '418': 'I\'m a teapot (RFC 2324 joke code)',
   '421': 'Misdirected Request',
-  '422': 'Unprocessable Entity(WebDAV)',
-  '423': 'Locked(WebDAV)',
-  '424': 'Failed Dependency(WebDAV)',
+  '422': 'Unprocessable Entity', // WebDAV
+  '423': 'Locked', // WebDAV
+  '424': 'Failed Dependency', // WebDAV
   '425': 'Too Early',
   '426': 'Upgrade Required',
   '428': 'Precondition Required',
@@ -67,8 +67,8 @@ export const HttpCodeDescription = {
   '504': 'Gateway Timeout',
   '505': 'HTTP Version Not Supported',
   '506': 'Variant Also Negotiates',
-  '507': 'Insufficient Storage(WebDAV)',
-  '508': 'Loop Detected(WebDAV)',
+  '507': 'Insufficient Storage', // WebDAV
+  '508': 'Loop Detected', // WebDAV
   '510': 'Not Extended',
   '511': 'Network Authentication Required',
 };
