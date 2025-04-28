@@ -1,6 +1,10 @@
+import { memo, useMemo } from "react";
+
 import { Checkbox } from "@/views/ui/checkbox"
 
 import { useLang } from '@/global/hooks/useLang';
+
+import { isEqual } from "@/utils/is";
 import { cn } from "@/utils/react";
 
 import { ContentEditable } from "../ContentEditable/ContentEditable";
@@ -40,10 +44,21 @@ interface KeyValueItemProps {
   onChange: (idx: number, update: Partial<KeyValueItem>) => void;
 }
 
-const KeyValueItem: React.FC<KeyValueItemProps> = (props) => {
-  const { idx, item, onChange } = props;
+const KeyValueItem: React.FC<KeyValueItemProps> = memo((props) => {
+  const { idx, item } = props;
 
   const fieldClassName = "px-2 py-1.5 border-[1px]";
+
+  const onChange = useMemo(() => {
+    const { onChange } = props;
+
+    return {
+      onActiveChange: (value: boolean) => onChange(idx, { active: [value, item.key[1]] }),
+      onKeyChange: (value: string) => onChange(idx, { key: [value, item.key[1]] }),
+      onValueChange: (value: string) => onChange(idx, { value: [value, item.value[1]] }),
+      onDescriptionChange: (value: string) => onChange(idx, { description: [value, item.description[1]] }),
+    };
+  }, [props.onChange, idx]);
 
   return (
     <>
@@ -52,7 +67,7 @@ const KeyValueItem: React.FC<KeyValueItemProps> = (props) => {
           className="block my-[5px]"
           checked={item.active[0]}
           disabled={!item.active[1]}
-          onCheckedChange={(value: boolean) => onChange(idx, { active: [value, item.key[1]] })}
+          onCheckedChange={onChange.onActiveChange}
         />
       </div>
       <ContentEditable
@@ -60,28 +75,28 @@ const KeyValueItem: React.FC<KeyValueItemProps> = (props) => {
         fieldClassName={cn(fieldClassName, "break-all")}
         value={item.key[0]}
         disabled={!item.key[1]}
-        onChange={(value) => console.log("Key:", value)}
-        options={item.keyOptions || []}
+        onChange={onChange.onKeyChange}
+        options={item.keyOptions}
       />
       <ContentEditable
         key={'v' + idx}
         fieldClassName={cn(fieldClassName, "break-all")}
         value={item.value[0]}
         disabled={!item.value[1]}
-        placeholder={item.example || ''}
-        options={item.valueOptions || []}
-        onChange={(value) => console.log("Value:", value)}
+        placeholder={item.example}
+        options={item.valueOptions}
+        onChange={onChange.onValueChange}
       />
       <ContentEditable
         key={'d' + idx}
         fieldClassName={fieldClassName}
         value={item.description[0]}
         disabled={!item.description[1]}
-        onChange={(value) => console.log("Description", value)}
+        onChange={onChange.onDescriptionChange}
       />
     </>
   );
-};
+}, isEqual);
 
 interface KeyValueEditorProps {
   items: KeyValueItem[];

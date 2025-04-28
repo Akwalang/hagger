@@ -6,19 +6,18 @@ import { RequestParamsType } from '../enums';
 import { getActivePageRequest } from '../../../selectors';
 import { updateActivePage } from '../../page/utils';
 
-export const changeRequestParams = (set: any) => (
-  type: RequestParamsType,
+export const changeRequestQueryParams = (set: any) => (
   idx: number,
   update: Partial<RequestParameter>,
 ): void => {
   set((state: State) => {
     const page = getActivePageRequest(state);
 
-    const list = page.data.request.params[type].map((item, i) => {
+    const list = page.data.request.params[RequestParamsType.Query].map((item, i) => {
       return idx === i ? { ...item, ...update } : item;
     });
 
-    const params = { [type]: list };
+    const params = { [RequestParamsType.Query]: list };
 
     return updateActivePage(state, { data: { request: { params } } });
   });

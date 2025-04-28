@@ -14,12 +14,14 @@ export const closePage = (set: any) => (pageId: string) => {
       throw new Error(`Page not found in group: pageId=${pageId} groupId=${group.id}`);
     }
 
+    const pageIds = group.pageIds.filter((_, i) => i !== idx);
+
+    const activePageId = pageIds[idx !== 0 ? idx - 1 : 0] || null;
+
     return {
       groups: replace(
         state.groups,
-        {
-          [group.id]: { pageIds: group.pageIds.filter((_, i) => i !== idx) },
-        },
+        { [group.id]: { activePageId, pageIds } },
       ),
       pages: without(state.pages, pageId),
     };

@@ -22,7 +22,7 @@ export const RequestLayout: React.FC<RequestLayoutProps> = () => {
   if (!page) return null;
 
   return (
-    <div className="flex grow flex-col items-stretch h-full">
+    <div key={page.id} className="flex grow flex-col items-stretch h-full">
       <div className="h-[80px]">
         <RequestMain {...page.data} />
       </div>

@@ -1,7 +1,8 @@
-import { useRef, useEffect, useState } from "react";
+import { memo, forwardRef, useRef, useEffect, useState } from "react";
 
 import * as Base from '@/views/ui/dropdown-menu';
 
+import { isEqual } from "@/utils/is";
 import { cn } from "@/utils/react";
 
 import { empower } from "./utils/empower.utils";
@@ -19,7 +20,7 @@ interface ContentEditableProps {
   onBlur?: () => void;
 }
 
-export const ContentEditable: React.FC<ContentEditableProps> = (props) => {
+export const ContentEditable: React.FC<ContentEditableProps> = memo((props) => {
   const [value, setValue] = useState(props.value);
   const [isOpen, setIsOpen] = useState(false);
   const [suggestions, setSuggestions] = useState<string[]>(filterSuggestions(value, props.options));
@@ -64,27 +65,57 @@ export const ContentEditable: React.FC<ContentEditableProps> = (props) => {
             {props.placeholder}
           </div>
         </Base.DropdownMenuTrigger>
-        <div
-          key="contenteditable"
+        {!!suggestions.length && <Options value={value} options={suggestions} onSelect={onSelect} />}
+      </Base.DropdownMenu>
+        <Field
           ref={field}
+          value={props.value}
+          key="contenteditable"
           className={cn(
             props.fieldClassName,
             "w-full h-full cursor-text",
             "focus:outline-0 focus:relative focus:border-primary focus:z-1",
           )}
-          data-placeholder={props.placeholder}
-          contentEditable={!props.disabled}
-          suppressContentEditableWarning={true}
+          disabled={props.disabled || false}
           onInput={() => onChange(field.current!.textContent ?? "")}
           onFocus={() => onFocus()}
-        >
-          {props.value}
-        </div>
-        {!!suggestions.length && <Options value={value} options={suggestions} onSelect={onSelect} />}
-      </Base.DropdownMenu>
+        />
     </div>
   );
-};
+}, isEqual);
+
+interface FieldProps {
+  ref: React.Ref<HTMLDivElement>;
+  value: string;
+  disabled: boolean;
+  className: string;
+  onInput: () => void;
+  onFocus: () => void;
+}
+
+const Field = memo(forwardRef<HTMLDivElement, FieldProps>((props, ref) => {
+  const [inValue, setInValue] = useState(props.value);
+
+  const { value, disabled, ...rest } = props;
+
+  useEffect(() => {
+    const propValue = (props.value || '').trim();
+    const refValue = ((ref as any).current.textContent || '').trim();
+
+    propValue !== refValue && setInValue(props.value);
+  }, [props.value]);
+
+  return (
+    <div
+      ref={ref}
+      key="contenteditable"
+      contentEditable={!props.disabled}
+      suppressContentEditableWarning={true}
+      children={inValue}
+      {...rest}
+    />
+  );
+}), isEqual);
 
 interface OptionsProps {
   value: string;
@@ -102,6 +133,7 @@ const Options: React.FC<OptionsProps> = (props) => {
     <Base.DropdownMenuPortal>
       <Base.DropdownMenuContent
         className="w-[var(--radix-dropdown-menu-trigger-width)]"
+        area-hidden="false"
         {...preventAutoFocus}
       >
         {props.options.map((option) => (
