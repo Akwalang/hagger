@@ -81,7 +81,7 @@ export const Tabs: React.FC<TabsProps> = () => {
     <HorizontalScrollArea className="w-full h-[38px] flex justify-center overflow-visible">
       <div className="flex w-full h-[35px] items-center" children={tabs} />
       <ScrollBar
-        className="h-[5px] [&>div]:top-[5px] [&>div]:bg-foreground [&>div]:opacity-50"
+        className="h-[5px] [&>div]:top-[5px] [&>div]:bg-foreground"
         orientation="horizontal"
       />
     </HorizontalScrollArea>

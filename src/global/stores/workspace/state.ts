@@ -11,7 +11,7 @@ export const State = (): State => {
   const ids = {
     environment: crypto.randomUUID(),
     group: crypto.randomUUID(),
-    pages: [...new Array(20)].map(() => crypto.randomUUID()),
+    pages: [...new Array(4)].map(() => crypto.randomUUID()),
   };
 
   return {
