@@ -7,8 +7,14 @@ import { Page } from "./state";
 
 export const createMockPage = (id: string, name: string): Page<PageType.Request, PageRequest> => ({
   id: id,
-  name: name,
   type: PageType.Request,
+  tab: {
+    name: name,
+    badge: {
+      text: HttpMethod.Post,
+      color: 'blue',
+    },
+  },
   data: {
     sourceId: null,
     request: {

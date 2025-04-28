@@ -4,8 +4,14 @@ import { createMockPage } from "./mock";
 
 export type Page<T extends PageType, Page extends Record<any, any>> = {
   id: string;
-  name: string;
   type: T;
+  tab: {
+    name: string;
+    badge: {
+      text: string;
+      color: string;
+    };
+  };
   data: Page;
 };
 
@@ -17,9 +23,7 @@ export type PageState = {
 };
 
 export const PageState = (ids: { pages: string[] }): PageState => ({
-  pages: {
-    [ids.pages[0]]: createMockPage(ids.pages[0], 'Page 1'),
-    [ids.pages[1]]: createMockPage(ids.pages[1], 'Page 2'),
-    [ids.pages[2]]: createMockPage(ids.pages[2], 'Page 3'),
-  },
+  pages: ids.pages.reduce((result, id, index) => {
+    return Object.assign(result, { [id]: createMockPage(id, `Page ${index + 1}: additional text`) });
+  }, {}),
 } as const);
