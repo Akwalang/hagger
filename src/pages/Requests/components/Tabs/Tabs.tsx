@@ -5,7 +5,7 @@ import { useWorkspaceStore } from '@/global/stores/workspace';
 import { getActiveGroup } from '@/global/stores/workspace/selectors';
 
 import { Separator } from '@/views/ui/separator';
-import { ScrollArea, ScrollBar } from "@/views/ui/scroll-area";
+import { HorizontalScrollArea, ScrollBar } from "@/views/ui/scroll-area";
 
 import { cn } from '@/utils/react';
 
@@ -78,12 +78,12 @@ export const Tabs: React.FC<TabsProps> = () => {
   });
 
   return (
-    <ScrollArea className="w-full h-[38px] flex justify-center overflow-visible [&>div>div]:scroll-horizontal">
+    <HorizontalScrollArea className="w-full h-[38px] flex justify-center overflow-visible">
       <div className="flex w-full h-[35px] items-center" children={tabs} />
       <ScrollBar
         className="h-[5px] [&>div]:top-[5px] [&>div]:bg-foreground [&>div]:opacity-50"
         orientation="horizontal"
       />
-    </ScrollArea>
+    </HorizontalScrollArea>
   );
 };

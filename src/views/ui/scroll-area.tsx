@@ -5,14 +5,14 @@ import { cn } from "@/utils/react";
 
 const ScrollArea = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root> & { viewportClassName?: string }
->(({ className, viewportClassName, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>
+>(({ className, children, ...props }, ref) => (
   <ScrollAreaPrimitive.Root
     ref={ref}
     className={cn("relative overflow-hidden", className)}
     {...props}
   >
-    <ScrollAreaPrimitive.Viewport className={cn("h-full w-full rounded-[inherit]", viewportClassName)}>
+    <ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]">
       {children}
     </ScrollAreaPrimitive.Viewport>
     <ScrollBar />
@@ -40,5 +40,55 @@ const ScrollBar = React.forwardRef<
   </ScrollAreaPrimitive.ScrollAreaScrollbar>
 ));
 ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName;
+
+type HorizontalScrollAreaProps = React.ComponentPropsWithoutRef<typeof ScrollArea>;
+
+export const HorizontalScrollArea = ({ children, ...props }: HorizontalScrollAreaProps) => {
+  const scroll = React.useRef<number>(0);
+  const ref = React.useRef<HTMLDivElement>(null)
+
+  React.useEffect(() => {
+    const el = ref.current;
+
+    if (!el) return;
+
+    const scrollBox = el.querySelector('& > div')!;
+
+    const onWheel = (e: WheelEvent) => {
+      if (e.deltaY === 0) return;
+
+      e.preventDefault();
+
+      const min = 0;
+      const max = scrollBox.scrollWidth - scrollBox.clientWidth;
+
+      let offset = scroll.current + e.deltaY;
+
+      offset < min && (offset = min);
+      offset > max && (offset = max);
+
+      scrollBox.scrollTo({
+        left: offset,
+        behavior: 'smooth',
+      });
+
+      scroll.current = offset;
+    };
+
+    el.addEventListener('wheel', onWheel, { passive: false });
+
+    return () => el.removeEventListener('wheel', onWheel);
+  }, [])
+
+  return (
+    <ScrollArea
+      ref={ref}
+      {...props}
+      className={`whitespace-nowrap ${props.className || ''}`}
+    >
+      {children}
+    </ScrollArea>
+  );
+}
 
 export { ScrollArea, ScrollBar };
