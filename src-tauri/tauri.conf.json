@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "face-hugger",
+  "productName": "hugger",
   "version": "0.1.0",
-  "identifier": "face-hugger.app",
+  "identifier": "hugger.app",
   "build": {
     "beforeDevCommand": "yarn dev",
     "devUrl": "http://localhost:1420",
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "face-hugger",
+        "title": "Hugger API",
         "width": 800,
         "height": 600
       }
