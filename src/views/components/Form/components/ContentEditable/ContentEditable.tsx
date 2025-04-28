@@ -5,6 +5,7 @@ import * as Base from '@/views/ui/dropdown-menu';
 import { cn } from "@/utils/react";
 
 import { empower } from "./utils/empower.utils";
+import { filterSuggestions } from "./utils/filter-suggestions.utils";
 
 interface ContentEditableProps {
   className?: string;
@@ -21,20 +22,14 @@ interface ContentEditableProps {
 export const ContentEditable: React.FC<ContentEditableProps> = (props) => {
   const [value, setValue] = useState(props.value);
   const [isOpen, setIsOpen] = useState(false);
-  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [suggestions, setSuggestions] = useState<string[]>(filterSuggestions(value, props.options));
 
   const field = useRef<HTMLDivElement>(null);
 
   const onChange = (value: string) => {
     props.onChange?.(value.trim());
 
-    const val = value.toLowerCase();
-
-    const list = (props.options || []).filter((option) => {
-      option = option.toLowerCase();
-
-      return option.includes(val) && option !== val;
-    });
+    const list = filterSuggestions(value, props.options);
 
     setValue(value);
     setSuggestions(list);
@@ -51,7 +46,7 @@ export const ContentEditable: React.FC<ContentEditableProps> = (props) => {
     props.onChange?.(value.trim());
 
     setValue(value);
-    setSuggestions([]);
+    setSuggestions(filterSuggestions(value, props.options));
     setIsOpen(false);
   };
 

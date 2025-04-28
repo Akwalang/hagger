@@ -1,5 +1,3 @@
-import { useEffect, useRef } from "react";
-
 import { Checkbox } from "@/views/ui/checkbox"
 
 import { useLang } from '@/global/hooks/useLang';
@@ -22,6 +20,9 @@ export type KeyValueItem = {
 
   example?: string;
 
+  keyOptions?: string[];
+  valueOptions?: string[];
+
   // format:
 
 
@@ -34,39 +35,48 @@ export type KeyValueItem = {
 };
 
 interface KeyValueItemProps {
+  idx: number;
   item: KeyValueItem;
-  onChange: (update: KeyValueItem) => void;
+  onChange: (idx: number, update: Partial<KeyValueItem>) => void;
 }
 
 const KeyValueItem: React.FC<KeyValueItemProps> = (props) => {
+  const { idx, item, onChange } = props;
+
   const fieldClassName = "px-2 py-1.5 border-[1px]";
 
   return (
     <>
       <div className="px-2 py-1 flex justify-center border-[1px]">
-        <Checkbox className="block my-[5px]" checked={props.item.active[0]} disabled={!props.item.active[1]} />
+        <Checkbox
+          className="block my-[5px]"
+          checked={item.active[0]}
+          disabled={!item.active[1]}
+          onCheckedChange={(value: boolean) => onChange(idx, { active: [value, item.key[1]] })}
+        />
       </div>
       <ContentEditable
-        key={'k' + props.item.key[0]}
+        key={'k' + idx}
         fieldClassName={cn(fieldClassName, "break-all")}
-        value={props.item.key[0]}
-        disabled={!props.item.key[1]}
+        value={item.key[0]}
+        disabled={!item.key[1]}
         onChange={(value) => console.log("Key:", value)}
+        options={item.keyOptions || []}
       />
       <ContentEditable
-        key={'v' + props.item.value[0]}
+        key={'v' + idx}
         fieldClassName={cn(fieldClassName, "break-all")}
-        value={props.item.value[0]}
-        disabled={!props.item.value[1]}
-        placeholder={props.item.example || ''}
+        value={item.value[0]}
+        disabled={!item.value[1]}
+        placeholder={item.example || ''}
+        options={item.valueOptions || []}
         onChange={(value) => console.log("Value:", value)}
-        options={['red', 'green', 'blue', 'black', 'white', 'yellow', 'orange', 'purple', 'pink']}
       />
       <ContentEditable
-        key={'d' + props.item.key[0]}
+        key={'d' + idx}
         fieldClassName={fieldClassName}
-        value={props.item.description[0]}
-        disabled={!props.item.description[1]}
+        value={item.description[0]}
+        disabled={!item.description[1]}
         onChange={(value) => console.log("Description", value)}
       />
     </>
@@ -76,7 +86,7 @@ const KeyValueItem: React.FC<KeyValueItemProps> = (props) => {
 interface KeyValueEditorProps {
   items: KeyValueItem[];
   edit?: (keyof KeyValueItem)[];
-  onChange?: (idx: number, update: KeyValueItem) => void;
+  onChange: (idx: number, update: Partial<KeyValueItem>) => void;
 }
 
 export const KeyValueEditor: React.FC<KeyValueEditorProps> = (props) => {
@@ -93,7 +103,7 @@ export const KeyValueEditor: React.FC<KeyValueEditorProps> = (props) => {
       <div className="px-2 py-1.5 font-semibold border-[1px]">{lang.columns.value()}</div>
       <div className="px-2 py-1.5 font-semibold border-[1px]">{lang.columns.description()}</div>
 
-      {props.items.map((item, i) => <KeyValueItem key={'i' + i} item={item} onChange={props.onChange(i)} />)}
+      {props.items.map((item, i) => <KeyValueItem key={'i' + i} idx={i} item={item} onChange={props.onChange} />)}
     </div>
   );
 };

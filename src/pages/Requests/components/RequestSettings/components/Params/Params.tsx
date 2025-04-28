@@ -1,9 +1,7 @@
 import { Form, KeyValueItem } from '@/views/components';
 
-import { useWorkspaceStore } from '@/global/stores/workspace';
+import { useWorkspaceStore, RequestParamsType } from '@/global/stores/workspace';
 import { useLang } from '@/global/hooks/useLang';
-import { curry } from '@/utils/functions';
-import { RequestParamsType } from '@/global/stores/workspace/slices/page-request/enums';
 
 interface ParamsProp {
   path: KeyValueItem[];
@@ -15,16 +13,16 @@ export const Params: React.FC<ParamsProp> = (props) => {
   const changeRequestParams = useWorkspaceStore((state) => state.changeRequestParams);
 
   return (
-    <div className="px-[15px] pb-[15px]">
+    <div className="flex flex-col px-[15px] pb-[15px] gap-[8px]">
       { !!props.path.length &&
-        <div className="mb-2">
+        <div>
           <h4 className="mb-2 text-sm">{lang.pathVariablesTitle()}</h4>
-          <Form.KeyValueEditor items={props.path} onChange={curry(changeRequestParams)(RequestParamsType.Path)} />
+          <Form.KeyValueEditor items={props.path} onChange={(...args) => changeRequestParams(RequestParamsType.Path, ...args)} />
         </div>
       }
       <div>
         <h4 className="mb-2 text-sm">{lang.queryParamsTitle()}</h4>
-        <Form.KeyValueEditor items={props.query} onChange={curry(changeRequestParams)(RequestParamsType.Query)}  />
+        <Form.KeyValueEditor items={props.query} onChange={(...args) => changeRequestParams(RequestParamsType.Query, ...args)}  />
       </div>
     </div>
   );
