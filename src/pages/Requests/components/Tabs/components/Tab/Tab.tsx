@@ -38,7 +38,13 @@ export const Tab: React.FC<TabProps> = (props) => {
               </div>
             </div>
           </div>
-          <div className="h-full flex items-center cursor-pointer hover:[&>svg]:stroke-primary" onClick={props.closeTab}>
+          <div
+            className={cn(
+              "w-[24px] h-full box-content pb-[2px] flex items-center cursor-pointer",
+              "hover:bg-primary/20 hover:[&>svg]:stroke-primary",
+            )}
+            onClick={props.closeTab}
+          >
             <X className="h-[14px]" />
           </div>
           <div className={cn(
