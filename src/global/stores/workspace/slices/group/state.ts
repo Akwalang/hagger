@@ -16,33 +16,33 @@ export type GroupState = {
 
 export const GroupState = (ids: {
   environment: string,
-  group: string,
+  groups: string[],
   pages: string[],
 }): GroupState => ({
   groups: {
-    [ids.group]: {
-      id: ids.group,
+    [ids.groups[0]]: {
+      id: ids.groups[0],
       icon: IconType.House,
       name: DEFAULT_GROUP_NAME,
       activePageId: ids.pages[1],
       pageIds: [...ids.pages],
     },
-    'random-1': {
-      id: ids.group,
+    [ids.groups[1]]: {
+      id: ids.groups[1],
       icon: IconType.Rocket,
       name: DEFAULT_GROUP_NAME,
       activePageId: null,
       pageIds: [],
     },
-    'random-2': {
-      id: ids.group,
+    [ids.groups[2]]: {
+      id: ids.groups[2],
       icon: IconType.Bug,
       name: DEFAULT_GROUP_NAME,
       activePageId: null,
       pageIds: [],
     },
-    'random-3': {
-      id: ids.group,
+    [ids.groups[3]]: {
+      id: ids.groups[3],
       icon: IconType.Alert,
       name: DEFAULT_GROUP_NAME,
       activePageId: null,

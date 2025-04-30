@@ -1,4 +1,19 @@
 export type RequestsPageLang = {
+  requestTabBar: {
+    contextMenu: {
+      closeAllPages: () => React.ReactNode;
+      moveAllPagesToGroup: () => React.ReactNode;
+    };
+  };
+  requestPages: {
+    contextMenu: {
+      closeAll: () => React.ReactNode;
+      closeAllOther: () => React.ReactNode;
+      rename: () => React.ReactNode;
+      duplicate: () => React.ReactNode;
+      moveToGroup: () => React.ReactNode;
+    };
+  };
   requestMain: {
     urlPlaceholder: () => string;
     sendButton: () => React.ReactNode;

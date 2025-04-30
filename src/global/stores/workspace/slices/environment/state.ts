@@ -18,15 +18,15 @@ export type EnvironmentState = {
 
 export const EnvironmentState = (ids: {
   environment: string,
-  group: string,
+  groups: string[],
 }): EnvironmentState => ({
   activeEnvironmentId: ids.environment,
   environments: {
     [ids.environment]: {
       id: ids.environment,
       name: DEFAULT_ENVIRONMENT_NAME,
-      activeGroupId: ids.group,
-      groupIds: [ids.group, 'random-1', 'random-2', 'random-3'],
+      activeGroupId: ids.groups[0],
+      groupIds: [...ids.groups],
       variables: [],
     },
   },
