@@ -20,6 +20,15 @@ interface TabProps {
 }
 
 export const Tab: React.FC<TabProps> = (props) => {
+  const onWheelClick = (event: MouseEvent<HTMLDivElement>) => {
+    if (event.button !== 1) return;
+
+    event.stopPropagation();
+    event.preventDefault();
+
+    props.closeTab(event);
+  };
+
   return (
     <>
       <div className={cn(
@@ -27,7 +36,7 @@ export const Tab: React.FC<TabProps> = (props) => {
         "[&>span]:w-full [&>span]:h-full [&>span]:flex [&>span]:items-center [&>span]:justify-center",
         props.isActive && "cursor-default",
         !props.isActive && "cursor-pointer hover:[&>div:last-child]:opacity-100",
-      )} onClick={props.setActivePage}>
+      )} onClick={props.setActivePage} onMouseDown={onWheelClick}>
         <TabContextMenu pageId={props.id}>
           <div className="flex flex-col justify-center grow h-full pl-3 pr-0.5">
             <div className={`text-[0.6rem] px-1 py-0 ml-[-3px] mb-[-4px] opacity-85`}>{props.badge.text}</div>
