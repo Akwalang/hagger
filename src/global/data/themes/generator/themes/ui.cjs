@@ -1,4 +1,4 @@
-exports.rawThemes = {
+exports.uiThemes = {
   "modern-minimal": {
     label: "Modern Minimal",
     styles: {

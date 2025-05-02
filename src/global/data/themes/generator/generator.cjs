@@ -1,7 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 
-const { rawThemes } = require("./raw-styles.cjs");
+const { artThemes } = require("./themes/art.cjs");
+const { uiThemes } = require("./themes/ui.cjs");
 
 const toPascalCase = (text) => {
   return text.toLowerCase().replace(/(?:^|-)(\w)/g, (_, letter) => letter.toUpperCase());
@@ -15,14 +16,26 @@ const toSnakeCase = (text) => {
   return text.toLowerCase().replace(/-/g, '_');
 };
 
-const toCss = (styles) => {
+const toCss = (stl) => {
   const css = {};
 
-  for (const [key, values] of Object.entries(styles)) {
+  const uiTheme = uiThemes[stl];
+  const artTheme = artThemes[stl];
+
+  for (const key of Object.keys(uiThemes[stl].styles)) {
     let items = [];
 
-    for (const [name, value] of Object.entries(values)) {
+    const uiStyles = uiThemes[stl].styles[key];
+    const artStyles = artThemes[stl].styles[key];
+
+    for (const [name, value] of Object.entries(uiStyles)) {
       items.push(`    --${name}: ${value};`);
+    }
+
+    items.push(``);
+
+    for (const [name, value] of Object.entries(artStyles)) {
+      items.push(`    --${name}: ${value || '#fff'};`);
     }
 
     css[key] = items.join('\n');
@@ -34,12 +47,12 @@ const toCss = (styles) => {
 const saveStyles = () => {
   const result = [];
 
-  for (const [name, { label, styles }] of Object.entries(rawThemes)) {
+  for (const [name, { label }] of Object.entries(uiThemes)) {
     const file = `../styles/${name}.ts`;
     const importPath = `./styles/${name}.ts`;
     const dest = path.join(__dirname, file);
 
-    const css = toCss(styles);
+    const css = toCss(name);
 
     let data = '';
 
@@ -51,13 +64,15 @@ const saveStyles = () => {
 
     data += `} as const;\n`;
 
-    fs.writeFileSync(dest, data, (err) => {
-      if (err) {
-        console.error(`Error writing file ${dest}:`, err);
-      } else {
-        console.log(`File ${dest} written successfully.`);
-      }
-    });
+    // if (!fs.existsSync(dest)) {
+      fs.writeFileSync(dest, data, (err) => {
+        if (err) {
+          console.error(`Error writing file ${dest}:`, err);
+        } else {
+          console.log(`File ${dest} written successfully.`);
+        }
+      });
+    // }
 
     result.push({ name, label, file, importPath });
   }
