@@ -184,12 +184,10 @@ const saveThemesExport = (files) => {
   });
 };
 
-const run = () => {
+exports.generate = () => {
   const files = saveStyles();
 
   saveEnumsExport(files);
   saveStylesExport(files);
   saveThemesExport(files);
 };
-
-run();
