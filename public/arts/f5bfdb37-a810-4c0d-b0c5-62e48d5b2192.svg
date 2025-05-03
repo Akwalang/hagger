@@ -805,7 +805,7 @@
   Q 261.35 239.38 262.82 241.17"
 />
 </g>
-<g fill="#ffffff">
+<g fill="var(--art-astronaut-primary)">
 <path d="
   M 298.43 168.04
   A 0.26 0.26 0.0 0 1 298.70 168.47
@@ -1235,7 +1235,7 @@
   Z"
 />
 </g>
-<g fill="#1465a4">
+<g fill="var(--art-stroke)">
 <path d="
   M 241.24 0.00
   C 274.39 2.42 303.62 17.41 322.08 45.58
@@ -2120,7 +2120,7 @@
 />
 <rect x="-14.39" y="-3.02" transform="translate(281.78,550.44) rotate(-36.6)" width="28.78" height="6.04" rx="2.95"/>
 </g>
-<path fill="#f38a3b" d="
+<path fill="var(--art-astronaut-accent)" d="
   M 310.50 58.99
   Q 310.44 60.42 312.25 60.90
   A 1.46 1.44 78.9 0 1 313.03 61.43
@@ -2138,7 +2138,7 @@
   Q 285.29 44.89 310.50 58.99
   Z"
 />
-<g fill="#6eb1e8">
+<g fill="var(--art-astronaut-secondary)">
 <path d="
   M 316.47 63.44
   Q 314.45 63.36 313.03 61.43
