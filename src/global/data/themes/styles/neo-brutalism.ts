@@ -41,6 +41,22 @@ export const styles = {
     --shadow-spread: 0px;
     --shadow-offset-x: 4px;
     --shadow-offset-y: 4px;
+
+    --art-stroke: #000000;
+    --art-astronaut-primary: #ffffff;
+    --art-astronaut-secondary: #0066ff;
+    --art-astronaut-accent: #ff3333;
+    --art-astronaut-glare: #ffffff;
+    --art-alien-primary: #ffffff;
+    --art-alien-secondary: #333333;
+    --art-egg-primary: #333333;
+    --art-egg-secondary: #333333;
+    --art-fire-primary: #ff3333;
+    --art-fire-secondary: #ffff00;
+    --art-item-primary: #ffff00;
+    --art-item-secondary: #333333;
+    --art-shadow: #000000;
+    --art-text: #000000;
   `,
   dark: `
     --background: #000000;
@@ -76,5 +92,21 @@ export const styles = {
     --sidebar-accent-foreground: #000000;
     --sidebar-border: #ffffff;
     --sidebar-ring: #ff6666;
+
+    --art-stroke: #ffffff;
+    --art-astronaut-primary: #000000;
+    --art-astronaut-secondary: #0066ff;
+    --art-astronaut-accent: #ff3333;
+    --art-astronaut-glare: #ff3333;
+    --art-alien-primary: #000000;
+    --art-alien-secondary: #000000;
+    --art-egg-primary: #333333;
+    --art-egg-secondary: #333333;
+    --art-fire-primary: #ff3333;
+    --art-fire-secondary: #ffff00;
+    --art-item-primary: #ffff00;
+    --art-item-secondary: #333333;
+    --art-shadow: #1e1e1e;
+    --art-text: #ffff00;
   `,
 } as const;

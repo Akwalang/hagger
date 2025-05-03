@@ -42,6 +42,22 @@ export const styles = {
     --shadow-spread: 0px;
     --shadow-offset-x: 0px;
     --shadow-offset-y: 1px;
+
+    --art-stroke: oklch(0 0 0);
+    --art-astronaut-primary: oklch(0.99 0 0);
+    --art-astronaut-secondary: oklch(0.72 0 0);
+    --art-astronaut-accent: oklch(0.94 0 0);
+    --art-astronaut-glare: oklch(0.99 0 0);
+    --art-alien-primary: oklch(0.99 0 0);
+    --art-alien-secondary: oklch(0.72 0 0);
+    --art-egg-primary: oklch(0.94 0 0);
+    --art-egg-secondary: oklch(0.72 0 0);
+    --art-fire-primary: oklch(0.63 0.19 23.03);
+    --art-fire-secondary: oklch(0.81 0.17 75.35);
+    --art-item-primary: oklch(0.94 0 0);
+    --art-item-secondary: oklch(0.72 0 0);
+    --art-shadow: oklch(0 0 0);
+    --art-text: oklch(0 0 0);
   `,
   dark: `
     --background: oklch(0 0 0);
@@ -79,5 +95,21 @@ export const styles = {
     --font-sans: Geist, sans-serif;
     --font-serif: Georgia, serif;
     --font-mono: Geist Mono, monospace;
+
+    --art-stroke: oklch(1 0 0);
+    --art-astronaut-primary: oklch(0 0 0);
+    --art-astronaut-secondary: oklch(0 0 0);
+    --art-astronaut-accent: oklch(0 0 0);
+    --art-astronaut-glare: oklch(0 0 0);
+    --art-alien-primary: oklch(0 0 0);
+    --art-alien-secondary: oklch(0 0 0);
+    --art-egg-primary: oklch(0 0 0);
+    --art-egg-secondary: oklch(0 0 0);
+    --art-fire-primary: oklch(0.63 0.19 23.03);
+    --art-fire-secondary: oklch(0.81 0.17 75.35);
+    --art-item-primary: oklch(0 0 0);
+    --art-item-secondary: oklch(0 0 0);
+    --art-shadow: oklch(0 0 0);
+    --art-text: oklch(1 0 0);
   `,
 } as const;
