@@ -6,6 +6,9 @@ import { getActiveGroup } from '@/global/stores/workspace/selectors';
 import { HorizontalScrollArea, ScrollBar } from "@/views/ui/scroll-area";
 
 import { Tab } from './components/Tab/Tab';
+import { Separator } from './components/Separator/Separator';
+import { ButtonAddTab } from './components/ButtonAddTab/ButtonAddTab';
+import { ButtonAllTabs } from './components/ButtonAllTabs/ButtonAllTabs';
 
 interface TabsProps {}
 
@@ -15,6 +18,7 @@ export const Tabs: React.FC<TabsProps> = () => {
 
   const closePage = useWorkspaceStore((state) => state.closePage);
   const setActivePage = useWorkspaceStore((state) => state.setActivePage);
+  const createNewPage = useWorkspaceStore((state) => state.createNewPage);
 
   const tabs = group.pageIds.map((id) => {
     const props = {
@@ -39,12 +43,20 @@ export const Tabs: React.FC<TabsProps> = () => {
   });
 
   return (
-    <HorizontalScrollArea className="w-full h-[38px] flex justify-center overflow-visible">
-      <div className="flex w-full h-[35px] items-center" children={tabs} />
-      <ScrollBar
-        className="h-[5px] [&>div]:top-[5px] [&>div]:bg-foreground"
-        orientation="horizontal"
-      />
-    </HorizontalScrollArea>
+    <div className="relative flex flex-row h-[38px] w-full">
+      <HorizontalScrollArea className="max-w-full grow h-full flex justify-center overflow-visible">
+        <div className="flex w-full h-[35px] pr-[77px] items-center [&>div]:last:hidden" children={tabs} />
+        <ScrollBar
+          className="h-[5px] [&>div]:top-[5px] [&>div]:bg-foreground"
+          orientation="horizontal"
+        />
+      </HorizontalScrollArea>
+      <div className="absolute top-0 right-0 flex min-w-[38px] h-full z-1 items-center justify-center bg-background">
+        <Separator full={true} />
+        <ButtonAddTab className="w-[38px]" onClick={createNewPage} />
+        <Separator full={true} />
+        <ButtonAllTabs className="w-[38px]" group={group} pages={pages} onSelect={setActivePage} />
+      </div>
+    </div>
   );
 };

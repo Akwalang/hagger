@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react';
 import { X } from 'lucide-react';
 
-import { Separator } from '@/views/ui/separator';
+import { Separator } from '../Separator/Separator';
 
 import { cn, WHITESPACE } from '@/utils/react';
 
@@ -62,7 +62,7 @@ export const Tab: React.FC<TabProps> = (props) => {
           )} />
         </TabContextMenu>
       </div>
-      <Separator className="h-[45%]" orientation="vertical" />
+      <Separator />
     </>
   );
 };

@@ -16,7 +16,6 @@ export const createMockPage = (id: string, name: string): Page<PageType.Request,
       name: name,
       badge: {
         text: method,
-        color: 'blue',
       },
     },
     data: {

@@ -45,12 +45,12 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = () => {
       </Button>
       <Base.DropdownMenu>
         <Base.DropdownMenuTrigger asChild>
-          <Button variant="link" size="sm" className={iconClassName}>
+          <Button variant="ghost" size="sm" className={iconClassName}>
             <Paintbrush className="text-foreground" size={14} />
             <div className="text-xs text-foreground ml-[-3px]">{selected.label}</div>
           </Button>
         </Base.DropdownMenuTrigger>
-        <Base.DropdownMenuContent align="end" className="w-[160px]">
+        <Base.DropdownMenuContent align="center" className="w-[160px]">
           <Options cur={theme} />
         </Base.DropdownMenuContent>
       </Base.DropdownMenu>

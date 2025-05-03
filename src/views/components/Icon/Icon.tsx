@@ -7,6 +7,8 @@ interface IconProps extends React.HTMLAttributes<SVGElement> {
   size: number;
 }
 
+export { IconType };
+
 export const Icon: React.FC<IconProps> = (props) => {
   const { icon, ...other } = props;
 

@@ -9,7 +9,6 @@ export type Page<T extends PageType, Page extends Record<any, any>> = {
     name: string;
     badge: {
       text: string;
-      color: string;
     };
   };
   data: Page;

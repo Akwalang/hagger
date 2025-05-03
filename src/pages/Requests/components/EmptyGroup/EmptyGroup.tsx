@@ -1,14 +1,16 @@
-import { IconType } from '@/global/data/icons';
+import { useWorkspaceStore } from '@/global/stores/workspace';
 
 import { Art, ArtName } from '@/views/components';
 import { Button } from '@/views/ui/button';
 
 import { ScrollArea } from "@/views/ui/scroll-area";
-import { Icon } from '@/views/components';
+import { Icon, IconType } from '@/views/components';
 
 interface EmptyGroupProps {}
 
 export const EmptyGroup: React.FC<EmptyGroupProps> = () => {
+  const createNewPage = useWorkspaceStore((state) => state.createNewPage);
+
   return (
     <div className="flex items-center justify-center w-full h-full text-sm text-primary/50">
       <div className="flex flex-col items-center justify-center gap-2">
@@ -32,7 +34,7 @@ export const EmptyGroup: React.FC<EmptyGroupProps> = () => {
           {/* <Art width="240px" ratio={0.78} name={ArtName.Chase} /> */}
         </div>
         <div className="flex select-none">
-          <Button variant="secondary" size="lg">
+          <Button variant="secondary" size="lg" onClick={createNewPage}>
             <Icon size={24} icon={IconType.Cross} />New page
           </Button>
         </div>
