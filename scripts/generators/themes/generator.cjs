@@ -1,8 +1,12 @@
 const fs = require("fs");
 const path = require("path");
 
-const { artThemes } = require("./themes/art.cjs");
-const { uiThemes } = require("./themes/ui.cjs");
+const { artThemes } = require("./data/art.cjs");
+const { uiThemes } = require("./data/ui.cjs");
+
+const { FRONTEND_APP_ROOT } = require("../../settings.cjs");
+
+const DEST_PATH = path.resolve(FRONTEND_APP_ROOT, './global/data/themes');
 
 const toPascalCase = (text) => {
   return text.toLowerCase().replace(/(?:^|-)(\w)/g, (_, letter) => letter.toUpperCase());
@@ -47,10 +51,14 @@ const toCss = (stl) => {
 const saveStyles = () => {
   const result = [];
 
+  const root = path.resolve(DEST_PATH, './styles');
+
+  fs.mkdirSync(root, { recursive: true });
+
   for (const [name, { label }] of Object.entries(uiThemes)) {
-    const file = `../styles/${name}.ts`;
+    const file = `./${name}.ts`;
     const importPath = `./styles/${name}.ts`;
-    const dest = path.join(__dirname, file);
+    const dest = path.resolve(root, file);
 
     const css = toCss(name);
 
@@ -64,17 +72,15 @@ const saveStyles = () => {
 
     data += `} as const;\n`;
 
-    // if (!fs.existsSync(dest)) {
-      fs.writeFileSync(dest, data, (err) => {
-        if (err) {
-          console.error(`Error writing file ${dest}:`, err);
-        } else {
-          console.log(`File ${dest} written successfully.`);
-        }
-      });
-    // }
+    fs.writeFileSync(dest, data, (err) => {
+      if (err) {
+        console.error(`Error writing file ${dest}:`, err);
+      } else {
+        console.log(`File ${dest} written successfully.`);
+      }
+    });
 
-    result.push({ name, label, file, importPath });
+    result.push({ name, label, file, importPath });``
   }
 
   return result.sort((a, b) => a.name.localeCompare(b.name));
@@ -105,7 +111,7 @@ const saveStylesExport = (files) => {
 
   data += `};\n`;
 
-  const dest = path.join(__dirname, '../styles.ts');
+  const dest = path.resolve(DEST_PATH, './styles.ts');
 
   fs.writeFileSync(dest, data, (err) => {
     if (err) {
@@ -134,7 +140,7 @@ const saveEnumsExport = (files) => {
   data += `  Dark = 'dark',\n`;
   data += `};\n`;
 
-  const dest = path.join(__dirname, '../enums.ts');
+  const dest = path.resolve(DEST_PATH, './enums.ts');
 
   fs.writeFileSync(dest, data, (err) => {
     if (err) {
@@ -173,7 +179,24 @@ const saveThemesExport = (files) => {
 
   data += `} as const;\n`;
 
-  const dest = path.join(__dirname, '../themes.ts');
+  const dest = path.resolve(DEST_PATH, './themes.ts');
+
+  fs.writeFileSync(dest, data, (err) => {
+    if (err) {
+      console.error(`Error writing file ${dest}:`, err);
+    } else {
+      console.log(`File ${dest} written successfully.`);
+    }
+  });
+};
+
+const saveExport = () => {
+  let data = '';
+
+  data += `export * from './themes';\n`;
+  data += `export * from './enums';\n`;
+
+  const dest = path.resolve(DEST_PATH, './index.ts');
 
   fs.writeFileSync(dest, data, (err) => {
     if (err) {
@@ -186,6 +209,8 @@ const saveThemesExport = (files) => {
 
 exports.generate = () => {
   const files = saveStyles();
+
+  saveExport();
 
   saveEnumsExport(files);
   saveStylesExport(files);

@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "generate:themes:run": "node ./scripts/generators/themes/run.cjs",
+    "generate:themes:watch": "node ./scripts/generators/themes/watch.cjs"
   },
   "dependencies": {
     "@radix-ui/colors": "^3.0.0",

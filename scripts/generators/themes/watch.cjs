@@ -1,10 +1,11 @@
 const fs = require('fs');
 const path = require('path');
+
 const cp = require('child_process');
 
 const files = [
-  './themes/art.cjs',
-  './themes/ui.cjs',
+  './data/art.cjs',
+  './data/ui.cjs',
 ];
 
 let time = +new Date();
@@ -19,16 +20,16 @@ function myFunction() {
   console.log('Running...');
   cp.exec(cmd, (err, stdout, stderr) => {
     if (err) {
-      console.error(`=> Error: ${err}`);
+      console.error(`- Error: ${err}`);
       return;
     }
     if (stderr) {
-      console.error(`=> stderr: ${stderr}`);
+      console.error(`- Warn: ${stderr}`);
       return;
     }
-    console.log(`=> stdout: ${stdout}`);
+    console.log(`${stdout}`);
   });
-  console.log('Done!');
+  console.log(`Done! ${+new Date() - time}ms`);
 }
 
 const run = (() => {
