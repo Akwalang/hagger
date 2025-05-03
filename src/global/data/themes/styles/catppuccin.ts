@@ -54,7 +54,7 @@ export const styles = {
     --art-egg-secondary: #ccd0da;
     --art-fire-primary: #fe640b;
     --art-fire-secondary: #dc8a78;
-    --art-item-primary: #04a5e5;
+    --art-item-primary: #eff39b;
     --art-item-secondary: #ccd0da;
     --art-shadow: #4c4f69;
     --art-text: #4c4f69;
@@ -104,7 +104,7 @@ export const styles = {
     --art-egg-secondary: #ccd0da;
     --art-fire-primary: #f38ba8;
     --art-fire-secondary: #ffb6ca;
-    --art-item-primary: #04a5e5;
+    --art-item-primary: #eff39b;
     --art-item-secondary: #ccd0da;
     --art-shadow: #2a272e;
     --art-text: #ccd0da;
