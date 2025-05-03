@@ -17,6 +17,9 @@ export enum ArtName {
   Swimming,
   Defeated,
   Chase,
+
+  // Composite
+  QueenFirstMeet,
 }
 
 export enum ArtFileName {

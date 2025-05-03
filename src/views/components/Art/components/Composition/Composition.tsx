@@ -60,6 +60,13 @@ const Scenes: Record<ArtName, () => React.ReactElement> = {
   [ArtName.Chase]: () => (
     <SvgImage src={"/arts/" + ArtFileName.Art_012} />
   ),
+
+  [ArtName.QueenFirstMeet]: () => (
+    <>
+      <SvgImage src={"/arts/" + ArtFileName.Art_015} style={{ position: "absolute", width: "60%", top: 0, left: 0 }} />
+      <SvgImage src={"/arts/" + ArtFileName.Art_030} style={{ position: "absolute", width: "30%", bottom: 0, right: 0 }} />
+    </>
+  ),
 };
 
 export const Composition: React.FC<CompositionProps> = (props) => {

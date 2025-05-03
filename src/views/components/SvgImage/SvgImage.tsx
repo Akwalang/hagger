@@ -1,28 +1,27 @@
-import { Loader, Cache } from "@/global/classes";
 import { useEffect, useState } from "react";
+
+import { Loader, Cache } from "@/global/classes";
 
 interface SvgImageProps {
   src: string;
+  style?: React.CSSProperties;
 }
 
-const LOADER = new Loader(new Cache(10));
+const LOADER = new Loader<string>(
+  new Cache(10),
+  async (data) => {
+    const svg = await data.text();
+    return svg.replace(/^.*(<svg\s)/is, "$1");
+  },
+);
 
 export const SvgImage: React.FC<SvgImageProps> = (props) => {
   const { src, ...other } = props;
 
-  const [svg, setSvg] = useState<string | null>(null);
+  const [svg, setSvg] = useState<string | null>(LOADER.get(src));
 
   useEffect(() => {
-    const { src } = props;
-
-    const load = async () => {
-      const data = await LOADER.load(src);
-      const svg = await data.text();
-
-      setSvg(svg.replace(/^.*(<svg\s)/is, "$1"));
-    };
-
-    load().catch((e) => console.error(e.message));
+    svg || LOADER.load(src).then(setSvg).catch((e) => console.error(e.message));
   }, [props.src]);
 
   return (
