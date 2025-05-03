@@ -114,9 +114,9 @@ export const KeyValueEditor: React.FC<KeyValueEditorProps> = (props) => {
       "[&>*]:ml-[-1px] [&>*]:mt-[-1px]",
     )}>
       <div className="border-[1px]" />
-      <div className="px-2 py-1.5 font-semibold border-[1px]">{lang.columns.key()}</div>
-      <div className="px-2 py-1.5 font-semibold border-[1px]">{lang.columns.value()}</div>
-      <div className="px-2 py-1.5 font-semibold border-[1px]">{lang.columns.description()}</div>
+      <div className="px-2 py-1.5 font-semibold border-[1px] select-none">{lang.columns.key()}</div>
+      <div className="px-2 py-1.5 font-semibold border-[1px] select-none">{lang.columns.value()}</div>
+      <div className="px-2 py-1.5 font-semibold border-[1px] select-none">{lang.columns.description()}</div>
 
       {props.items.map((item, i) => <KeyValueItem key={'i' + i} idx={i} item={item} onChange={props.onChange} />)}
     </div>

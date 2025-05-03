@@ -32,7 +32,7 @@ export const Tab: React.FC<TabProps> = (props) => {
   return (
     <>
       <div className={cn(
-        "relative h-full text-sm flex basis-[160px] min-w-[90px]",
+        "relative h-full text-sm flex basis-[160px] min-w-[90px] select-none",
         "[&>span]:w-full [&>span]:h-full [&>span]:flex [&>span]:items-center [&>span]:justify-center",
         props.isActive && "cursor-default",
         !props.isActive && "cursor-pointer hover:[&>div:last-child]:opacity-100",

@@ -36,7 +36,7 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = () => {
   const iconClassName = "h-full flex p-0.5 shadow-none bg-transparent focus:outline-none hover:no-underline";
 
   return (
-    <div className="h-full items-center flex">
+    <div className="h-full items-center flex select-none">
       <Button variant="link" size="sm" className={iconClassName} onClick={toggleMode}>
         <ModeIcon className="text-foreground" size={14} />
       </Button>

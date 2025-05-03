@@ -64,7 +64,7 @@ export const Tabs: React.FC<TabsProps> = (props) => {
   return (
     <Base.Tabs defaultValue={props.defaultValue} className="h-full flex flex-col">
       <div className={cn("space-between flex items-center m-0.5", props.className)}>
-        <Base.TabsList className="h-auto mx-[-4px] p-0 bg-transparent">{controls}</Base.TabsList>
+        <Base.TabsList className="h-auto mx-[-4px] p-0 bg-transparent select-none">{controls}</Base.TabsList>
         {addons}
       </div>
       <Wrapper className="grow">

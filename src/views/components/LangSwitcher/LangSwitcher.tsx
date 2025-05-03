@@ -33,12 +33,12 @@ export const LangSwitcher: React.FC<LangSwitcherProps> = () => {
     <div className="h-full items-center flex">
       <Base.DropdownMenu>
         <Base.DropdownMenuTrigger asChild>
-          <Button variant="link" size="sm" className="h-full flex p-0.5 shadow-none bg-transparent focus:outline-none hover:no-underline">
+          <Button variant="link" size="sm" className="h-full flex p-0.5 shadow-none bg-transparent focus:outline-none hover:no-underline select-none">
             <Languages className="text-foreground" size={14} />
             <div className="text-xs text-foreground ml-[-3px]">{lang.name()}</div>
           </Button>
         </Base.DropdownMenuTrigger>
-        <Base.DropdownMenuContent align="end" className="w-[160px]">
+        <Base.DropdownMenuContent align="end" className="w-[160px] select-none">
           <Options cur={cur} />
         </Base.DropdownMenuContent>
       </Base.DropdownMenu>

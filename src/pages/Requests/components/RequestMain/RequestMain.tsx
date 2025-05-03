@@ -43,9 +43,9 @@ export const RequestMain: React.FC<RequestMainProps> = memo((props) => {
       </div>
 
       <div className="flex gap-2">
-        <Form.Select className="min-w-[110px] max-w-[110px] text-center" value={request.method} items={methods} onChange={(method) => changeRequestMethod(method as HttpMethod)}  />
+        <Form.Select className="min-w-[110px] max-w-[110px] text-center select-none" value={request.method} items={methods} onChange={(method) => changeRequestMethod(method as HttpMethod)}  />
         <Form.Input className="grow" value={request.url} onChange={onInputChange} placeholder={lang.urlPlaceholder()} />
-        <div className="relative flex">
+        <div className="relative flex select-none">
           <Form.Button type="submit">{lang.sendButton()}</Form.Button>
           <Form.Button size="sm" variant="secondary" className={cn(
             "absolute top-[-10px] right-[-10px]",

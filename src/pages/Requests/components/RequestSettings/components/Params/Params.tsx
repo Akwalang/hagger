@@ -18,12 +18,12 @@ export const Params: React.FC<ParamsProp> = (props) => {
     <div className="flex flex-col px-[15px] pb-[15px] gap-[8px]">
       { !!props.path.length &&
         <div>
-          <h4 className="mb-2 text-sm">{lang.pathVariablesTitle()}</h4>
+          <h4 className="mb-2 text-sm select-none">{lang.pathVariablesTitle()}</h4>
           <Form.KeyValueEditor items={props.path} onChange={changeRequestPathParams} />
         </div>
       }
       <div>
-        <h4 className="mb-2 text-sm">{lang.queryParamsTitle()}</h4>
+        <h4 className="mb-2 text-sm select-none">{lang.queryParamsTitle()}</h4>
         <Form.KeyValueEditor items={props.query} onChange={changeRequestQueryParams}  />
       </div>
     </div>

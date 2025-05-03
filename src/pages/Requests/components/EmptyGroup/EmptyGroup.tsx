@@ -31,7 +31,7 @@ export const EmptyGroup: React.FC<EmptyGroupProps> = () => {
           {/* <Art width="200px" ratio={1.37} name={ArtName.Defeated} /> */}
           {/* <Art width="240px" ratio={0.78} name={ArtName.Chase} /> */}
         </div>
-        <div className="flex">
+        <div className="flex select-none">
           <Button variant="secondary" size="lg">
             <Icon size={24} icon={IconType.Cross} />New page
           </Button>

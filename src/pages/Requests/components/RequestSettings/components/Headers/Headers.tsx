@@ -23,7 +23,7 @@ export const Headers: React.FC<HeadersProp> = (props) => {
   return (
     <div className="flex flex-col px-[15px] pb-[15px] gap-[8px]">
       <div>
-        <h4 className="mb-2 text-sm">{lang.headersTitle()}</h4>
+        <h4 className="mb-2 text-sm select-none">{lang.headersTitle()}</h4>
         <Form.KeyValueEditor items={headers} onChange={changeRequestHeaders} />
       </div>
     </div>
