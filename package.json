@@ -8,6 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "tauri": "tauri",
+    "generate:icon:run": "node ./scripts/generators/icon/run.cjs",
     "generate:themes:run": "node ./scripts/generators/themes/run.cjs",
     "generate:themes:watch": "node ./scripts/generators/themes/watch.cjs"
   },
@@ -68,6 +69,7 @@
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
+    "icon-gen": "^5.0.0",
     "typescript": "~5.6.2",
     "vite": "^6.0.3",
     "vite-tsconfig-paths": "^5.1.4"
