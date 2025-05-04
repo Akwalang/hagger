@@ -4,7 +4,7 @@ const gen = require("icon-gen");
 
 const { prefix, mapping } = require("./mapping.cjs");
 
-const { BACKEND_APP_ROOT } = require("../../settings.cjs");
+const { WEB_PUBLIC_ROOT, BACKEND_APP_ROOT } = require("../../settings.cjs");
 
 const ICON_FOLDER = path.resolve(BACKEND_APP_ROOT, "./icons");
 
@@ -37,14 +37,26 @@ const generateIcons = async () => {
   }
 };
 
-const moveIcons = () => {
+const copyFavicon = () => {
+  const src = path.resolve(__dirname, "./data/icon.svg");
+  const dest = path.resolve(WEB_PUBLIC_ROOT, "favicon.svg");
+
+  if (fs.existsSync(src)) {
+    fs.copyFileSync(src, dest);
+    console.log(`Copied ${src} to ${dest}`);
+  } else {
+    console.error(`Source file ${src} does not exist`);
+  }
+};
+
+const copyIcons = () => {
   mapping.forEach((item) => {
     const src = path.resolve(__dirname, "temp", item.tmp);
     const dest = path.resolve(ICON_FOLDER, item.dest);
 
     if (fs.existsSync(src)) {
       fs.copyFileSync(src, dest);
-      console.log(`Moved ${src} to ${dest}`);
+      console.log(`Copied ${src} to ${dest}`);
     } else {
       console.error(`Source file ${src} does not exist`);
     }
@@ -54,5 +66,6 @@ const moveIcons = () => {
 exports.generate = async () => {
   await generateIcons();
 
-  moveIcons();
+  copyFavicon();
+  copyIcons();
 };
