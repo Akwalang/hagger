@@ -1,3 +1,7 @@
+type Options = {
+  multiline?: boolean;
+};
+
 const insertTextAtCursor = (text: string) => {
   const sel = window.getSelection();
 
@@ -25,12 +29,14 @@ const insertTextAtCursor = (text: string) => {
   sel.addRange(range);
 };
 
-export const empower = (element: HTMLDivElement): () => void => {
+export const empower = (element: HTMLDivElement, options: Options): () => void => {
   const handleEnter = (event: KeyboardEvent) => {
     // console.log('Before:', element.innerHTML);
 
     if (event.key === "Enter") {
       event.preventDefault();
+
+      if (!options.multiline) return;
 
       const html = element.innerHTML;
 

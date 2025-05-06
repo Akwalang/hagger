@@ -7,6 +7,7 @@ export type RequestsPageLang = {
   };
   requestPages: {
     contextMenu: {
+      pageNamePlaceholder: () => string;
       closeAll: () => React.ReactNode;
       closeAllOther: () => React.ReactNode;
       rename: () => React.ReactNode;

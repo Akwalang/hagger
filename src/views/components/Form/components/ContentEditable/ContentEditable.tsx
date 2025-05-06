@@ -12,6 +12,7 @@ interface ContentEditableProps {
   className?: string;
   fieldClassName?: string;
   value: string;
+  multiline?: boolean;
   placeholder?: string;
   options?: string[];
   disabled?: boolean
@@ -51,7 +52,11 @@ export const ContentEditable: React.FC<ContentEditableProps> = memo((props) => {
     setIsOpen(false);
   };
 
-  useEffect(() => empower(field.current!), []);
+  useEffect(() => {
+    const { multiline } = props;
+
+    empower(field.current!, { multiline });
+  }, [props.multiline]);
 
   return (
     <div className={cn("relative", props.className)}>

@@ -5,7 +5,7 @@ import { getActiveGroup, getActiveEnvironment } from "@/global/stores/workspace/
 
 import { useLang } from "@/global/hooks";
 
-import { Icon } from "@/views/components";
+import { Form, Icon } from "@/views/components";
 
 import * as Base from "@/views/ui/context-menu";
 import { WHITESPACE } from "@/utils/react";
@@ -26,6 +26,7 @@ export const TabContextMenu: React.FC<TabContextMenuProps> = (props) => {
 
   const page = useWorkspaceStore((state) => state.pages[props.pageId]);
 
+  const renamePage = useWorkspaceStore((state) => state.renamePage);
   const closeAllPages = useWorkspaceStore((state) => state.closeAllPages);
   const closeAllOtherPages = useWorkspaceStore((state) => state.closeAllOtherPages);
   const movePageToGroup = useWorkspaceStore((state) => state.movePageToGroup);
@@ -41,7 +42,13 @@ export const TabContextMenu: React.FC<TabContextMenuProps> = (props) => {
       <Base.ContextMenuTrigger>{props.children}</Base.ContextMenuTrigger>
       { isOpen &&
         <Base.ContextMenuContent className="min-w-[200px]" onClick={(e) => e.stopPropagation()}>
-          <Base.ContextMenuLabel>{page.tab.name}</Base.ContextMenuLabel>
+          <Base.ContextMenuLabel>
+            <Form.ContentEditable
+              value={page.tab.name}
+              placeholder={lang.pageNamePlaceholder()}
+              onChange={(value) => renamePage(page.id, value)}
+            />
+          </Base.ContextMenuLabel>
 
           { !!groupsList.length &&
             <>

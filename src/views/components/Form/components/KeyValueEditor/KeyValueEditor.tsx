@@ -89,6 +89,7 @@ const KeyValueItem: React.FC<KeyValueItemProps> = memo((props) => {
       />
       <ContentEditable
         key={'d' + idx}
+        multiline={true}
         fieldClassName={fieldClassName}
         value={item.description[0]}
         disabled={!item.description[1]}

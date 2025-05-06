@@ -9,6 +9,7 @@ export const requests: RequestsPageLang = {
   },
   requestPages: {
     contextMenu: {
+      pageNamePlaceholder: () => 'Увядзіце назву старонкі',
       closeAll: () => 'Закрыць усе старонкі',
       closeAllOther: () => 'Закрыць усе іншыя старонкі',
       rename: () => 'Перайменаваць старонку',

@@ -9,6 +9,7 @@ export const requests: RequestsPageLang = {
   },
   requestPages: {
     contextMenu: {
+      pageNamePlaceholder: () => 'Set page name',
       closeAll: () => 'Close all pages',
       closeAllOther: () => 'Close all other pages',
       rename: () => 'Rename page',
