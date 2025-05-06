@@ -41,6 +41,7 @@ export type KeyValueItem = {
 interface KeyValueItemProps {
   idx: number;
   item: KeyValueItem;
+  isNew?: boolean;
   onChange: (idx: number, update: Partial<KeyValueItem>) => void;
 }
 
@@ -63,12 +64,14 @@ const KeyValueItem: React.FC<KeyValueItemProps> = memo((props) => {
   return (
     <>
       <div className="px-2 py-1 flex justify-center border-[1px]">
-        <Checkbox
-          className="block my-[5px]"
-          checked={item.active[0]}
-          disabled={!item.active[1]}
-          onCheckedChange={onChange.onActiveChange}
-        />
+        { !props.isNew &&
+          <Checkbox
+            className="block my-[5px]"
+            checked={item.active[0]}
+            disabled={!item.active[1]}
+            onCheckedChange={onChange.onActiveChange}
+          />
+        }
       </div>
       <ContentEditable
         key={'k' + idx}
@@ -100,13 +103,31 @@ const KeyValueItem: React.FC<KeyValueItemProps> = memo((props) => {
 }, isEqual);
 
 interface KeyValueEditorProps {
+  extendable?: boolean;
   items: KeyValueItem[];
   edit?: (keyof KeyValueItem)[];
   onChange: (idx: number, update: Partial<KeyValueItem>) => void;
 }
 
+const createEmptyItem = (): KeyValueItem => ({
+  isPinned: false,
+  isRemovable: true,
+  isRequired: false,
+  isNullable: true,
+  isValid: true,
+
+  active: [false, true],
+  key: ["", true],
+  value: ["", true],
+  description: ["", true],
+});
+
 export const KeyValueEditor: React.FC<KeyValueEditorProps> = (props) => {
   const lang = useLang((store) => store.components.form.keyValueEditor);
+
+  const items: [boolean, KeyValueItem][] = props.items.map((item) => [false, item]);
+
+  props.extendable && items.push([true, createEmptyItem()]);
 
   return (
     <div className={cn(
@@ -119,7 +140,15 @@ export const KeyValueEditor: React.FC<KeyValueEditorProps> = (props) => {
       <div className="px-2 py-1.5 font-semibold border-[1px] select-none">{lang.columns.value()}</div>
       <div className="px-2 py-1.5 font-semibold border-[1px] select-none">{lang.columns.description()}</div>
 
-      {props.items.map((item, i) => <KeyValueItem key={'i' + i} idx={i} item={item} onChange={props.onChange} />)}
+      {items.map(([isNew, item], i) => (
+        <KeyValueItem
+          key={'i' + i}
+          idx={i}
+          isNew={isNew}
+          item={item}
+          onChange={props.onChange}
+        />
+      ))}
     </div>
   );
 };

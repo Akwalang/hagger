@@ -5,6 +5,8 @@ import { getActivePageRequest } from '../../../selectors';
 
 import { updateActivePage } from '../../page/utils';
 
+import { createEmptyParam } from '../utils/create-empty-param.utils';
+
 export const changeRequestHeaders = (set: any) => (
   idx: number,
   update: Partial<RequestParameter>,
@@ -15,6 +17,10 @@ export const changeRequestHeaders = (set: any) => (
     const headers = page.data.request.headers.map((item, i) => {
       return idx === i ? { ...item, ...update } : item;
     });
+
+    if (idx > headers.length - 1) {
+      headers.push({ ...createEmptyParam(), ...update } as RequestParameter);
+    }
 
     return updateActivePage(state, { data: { request: { headers } } });
   });

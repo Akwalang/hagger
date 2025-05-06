@@ -24,7 +24,7 @@ export const Params: React.FC<ParamsProp> = (props) => {
       }
       <div>
         <h4 className="mb-2 text-sm select-none">{lang.queryParamsTitle()}</h4>
-        <Form.KeyValueEditor items={props.query} onChange={changeRequestQueryParams}  />
+        <Form.KeyValueEditor extendable={true} items={props.query} onChange={changeRequestQueryParams}  />
       </div>
     </div>
   );
