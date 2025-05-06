@@ -27,8 +27,12 @@ export const empower = (element: HTMLDivElement, options: Options): () => void =
 
   const handlePaste = (event: ClipboardEvent) => {
     event.preventDefault();
+
     const text = event.clipboardData?.getData("text/plain") ?? "";
+
     insertTextAtCursor(text);
+
+    text && element.dispatchEvent(new InputEvent("input", { bubbles: true }));
   };
 
   element.addEventListener("keydown", handleEnter);
