@@ -2,34 +2,11 @@ type Options = {
   multiline?: boolean;
 };
 
-const insertTextAtCursor = (text: string) => {
-  const sel = window.getSelection();
-
-  if (!sel || sel.rangeCount === 0) return;
-
-  const range = sel.getRangeAt(0);
-
-  range.deleteContents();
-
-  const lines = text.split("\n");
-  const frag = document.createDocumentFragment();
-
-  lines.forEach((line, index) => {
-    if (index > 0) frag.appendChild(document.createElement("br"));
-    frag.appendChild(document.createTextNode(line));
-  });
-
-  const lastChild = frag.lastChild!;
-  range.insertNode(frag);
-
-  range.setStartAfter(lastChild);
-  range.collapse(true);
-
-  sel.removeAllRanges();
-  sel.addRange(range);
-};
-
 export const empower = (element: HTMLDivElement, options: Options): () => void => {
+  if (isEmpowered(element)) return () => {};
+
+  addLineBreakIfNeeded(element);
+
   const handleEnter = (event: KeyboardEvent) => {
     // console.log('Before:', element.innerHTML);
 
@@ -40,12 +17,7 @@ export const empower = (element: HTMLDivElement, options: Options): () => void =
 
       const html = element.innerHTML;
 
-      let value = (() => {
-        if (html === "<br>") return "\n";
-        if (html.endsWith("<br>")) return "\n";
-
-        return "\n\n";
-      })();
+      let value = html ? "\n" : "\n\n";
 
       insertTextAtCursor(value);
     }
@@ -66,4 +38,54 @@ export const empower = (element: HTMLDivElement, options: Options): () => void =
     element.removeEventListener("keydown", handleEnter);
     element.removeEventListener("paste", handlePaste);
   };
+};
+
+const breakLine = (): HTMLBRElement => document.createElement("br");
+
+const isEmpowered = (element: HTMLDivElement): boolean => {
+  const status = element.dataset.empowered === "true";
+
+  !status && (element.dataset.empowered = "true");
+
+  return status;
+};
+
+const addLineBreakIfNeeded = (element: HTMLDivElement) => {
+  const last = element.lastChild as any;
+
+  let exit = false;
+
+  exit ||= !last;
+  exit ||= last.tagname === "BR";
+
+  if (exit) return;
+
+  element.appendChild(breakLine());
+};
+
+const insertTextAtCursor = (text: string) => {
+  const sel = window.getSelection();
+
+  if (!sel || sel.rangeCount === 0) return;
+
+  const range = sel.getRangeAt(0);
+
+  range.deleteContents();
+
+  const lines = text.split("\n");
+  const frag = document.createDocumentFragment();
+
+  lines.forEach((line, index) => {
+    if (index > 0) frag.appendChild(breakLine());
+    frag.appendChild(document.createTextNode(line));
+  });
+
+  const lastChild = frag.lastChild!;
+  range.insertNode(frag);
+
+  range.setStartAfter(lastChild);
+  range.collapse(true);
+
+  sel.removeAllRanges();
+  sel.addRange(range);
 };
