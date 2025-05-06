@@ -64,7 +64,7 @@ export const ContentEditable: React.FC<ContentEditableProps> = memo((props) => {
         <Base.DropdownMenuTrigger asChild>
           <div className={cn(
             props.fieldClassName,
-            "absolute top-0 left-0 w-full h-full pointer-events-none",
+            "absolute top-0 left-0 w-full h-full pointer-events-none select-none",
             value === '' || value === '<br>' ? "text-foreground/40" : "text-transparent",
           )}>
             {props.placeholder}
