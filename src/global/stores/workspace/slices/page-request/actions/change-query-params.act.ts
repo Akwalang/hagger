@@ -1,10 +1,12 @@
-import { State } from '../../../state';
+import { Url } from "@/utils/common";
 
-import { RequestParameter } from '../types';
-import { RequestParamsType } from '../enums';
+import { State } from "../../../state";
 
-import { getActivePageRequest } from '../../../selectors';
-import { updateActivePage } from '../../page/utils';
+import { RequestParameter } from "../types";
+import { RequestParamsType } from "../enums";
+
+import { getActivePageRequest } from "../../../selectors";
+import { updateActivePage } from "../../page/utils";
 
 export const changeRequestQueryParams = (set: any) => (
   idx: number,
@@ -19,6 +21,14 @@ export const changeRequestQueryParams = (set: any) => (
 
     const params = { [RequestParamsType.Query]: list };
 
-    return updateActivePage(state, { data: { request: { params } } });
+    const urlAnatomy = Url.parseUrl(page.data.request.url);
+
+    urlAnatomy.search = list.map((item) => (
+      `${item.key[0]}=${encodeURIComponent(item.value[0])}`
+    )).join("&");
+
+    const url = Url.joinUrl(urlAnatomy);
+
+    return updateActivePage(state, { data: { request: { url, params } } });
   });
 };

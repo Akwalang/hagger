@@ -49,7 +49,7 @@ const extractHash = (url: string): [string | null, string] => {
   return idx !== -1 ? [url.slice(idx + 1), url.slice(0, idx)] : [null, url];
 };
 
-export const parse = (url: string): Anatomy => {
+export const parseUrl = (url: string): Anatomy => {
   var rest = url;
 
   var { 0: protocol, 1: rest } = extractProtocol(rest);
@@ -77,4 +77,18 @@ export const parseSearch = (search: string | null): [string, string][] => {
   });
 
   return params;
+};
+
+export const joinUrl = (url: Anatomy): string => {
+  let result = '';
+
+  if (url.protocol) result += url.protocol + '://';
+  if (url.auth) result += url.auth + '@';
+  if (url.host) result += url.host;
+  if (url.port) result += ':' + url.port;
+  if (url.path) result += url.path;
+  if (url.search) result += '?' + url.search;
+  if (url.hash) result += '#' + url.hash;
+
+  return result;
 };

@@ -114,7 +114,7 @@ export const changeRequestUrl = (set: any) => (url: string) => {
   set((state: State) => {
     const page = getActivePageRequest(state);
 
-    const components = Url.parse(url);
+    const components = Url.parseUrl(url);
 
     const path = Plc.extract(url, Plc.Types.Colon).map((item) => item.value);
     const query = Url.parseSearch(components.search);
