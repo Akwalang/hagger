@@ -8,7 +8,7 @@ import { useLang } from "@/global/hooks";
 import { Form, Icon } from "@/views/components";
 
 import * as Base from "@/views/ui/context-menu";
-import { WHITESPACE } from "@/utils/react";
+import { cn, WHITESPACE } from "@/utils/react";
 
 interface TabContextMenuProps {
   pageId: string;
@@ -42,8 +42,13 @@ export const TabContextMenu: React.FC<TabContextMenuProps> = (props) => {
       <Base.ContextMenuTrigger>{props.children}</Base.ContextMenuTrigger>
       { isOpen &&
         <Base.ContextMenuContent className="min-w-[200px]" onClick={(e) => e.stopPropagation()}>
-          <Base.ContextMenuLabel>
+          <Base.ContextMenuLabel className="p-0">
             <Form.ContentEditable
+              fieldClassName={cn(
+                "px-2 py-1.5 rounded-sm",
+                "hover:bg-accent hover:text-accent-foreground",
+                "focus:bg-accent focus:text-accent-foreground",
+              )}
               value={page.tab.name}
               placeholder={lang.pageNamePlaceholder()}
               onChange={(value) => renamePage(page.id, value)}
