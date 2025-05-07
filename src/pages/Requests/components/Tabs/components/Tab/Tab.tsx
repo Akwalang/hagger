@@ -12,21 +12,26 @@ interface TabProps {
   name: string;
   badge: {
     text: string;
-    color: string;
   };
   isActive: boolean;
-  setActivePage: (event: MouseEvent<HTMLDivElement>) => void;
-  closeTab: (event: MouseEvent<HTMLDivElement>) => void;
+  setActivePage: (id: string) => void;
+  closePage: (id: string) => void;
 }
 
 export const Tab: React.FC<TabProps> = (props) => {
-  const onWheelClick = (event: MouseEvent<HTMLDivElement>) => {
-    if (event.button !== 1) return;
-
-    event.stopPropagation();
+  const onMouseDown = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
+    event.stopPropagation();
 
-    props.closeTab(event);
+    event.button === 0 && props.setActivePage(props.id);
+    event.button === 1 && props.closePage(props.id);
+  };
+
+  const onCrossClick = (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    props.closePage(props.id);
   };
 
   return (
@@ -36,7 +41,7 @@ export const Tab: React.FC<TabProps> = (props) => {
         "[&>span]:w-full [&>span]:h-full [&>span]:flex [&>span]:items-center [&>span]:justify-center",
         props.isActive && "cursor-default",
         !props.isActive && "cursor-pointer hover:[&>div:last-child]:opacity-100",
-      )} onClick={props.setActivePage} onMouseDown={onWheelClick}>
+      )} onMouseDown={onMouseDown}>
         <TabContextMenu pageId={props.id}>
           <div className="flex flex-col justify-center grow h-full pl-3 pr-0.5">
             <div className={`text-[0.6rem] px-1 py-0 ml-[-3px] mb-[-4px] opacity-85`}>{props.badge.text}</div>
@@ -52,7 +57,7 @@ export const Tab: React.FC<TabProps> = (props) => {
               "w-[24px] h-full box-content py-[1px] flex items-center cursor-pointer",
               "hover:bg-primary/20 hover:[&>svg]:stroke-primary",
             )}
-            onClick={props.closeTab}
+            onClick={onCrossClick}
           >
             <X className="h-[14px]" />
           </div>

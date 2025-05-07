@@ -26,17 +26,8 @@ export const Tabs: React.FC<TabsProps> = () => {
       name: pages[id].tab.name,
       badge: pages[id].tab.badge,
       isActive: id === group.activePageId,
-      setActivePage: (event: MouseEvent) => {
-        event.stopPropagation();
-
-        if (event.button !== 0) return;
-
-        setActivePage(id);
-      },
-      closeTab: (event: MouseEvent) => {
-        event.stopPropagation();
-        closePage(id);
-      },
+      setActivePage,
+      closePage,
     };
 
     return <Tab key={id} {...props} />;
@@ -55,7 +46,13 @@ export const Tabs: React.FC<TabsProps> = () => {
         <Separator full={true} />
         <ButtonAddTab className="w-[38px]" onClick={createNewPage} />
         <Separator full={true} />
-        <ButtonAllTabs className="w-[38px]" group={group} pages={pages} onSelect={setActivePage} />
+        <ButtonAllTabs
+          className="w-[38px]"
+          group={group}
+          pages={pages}
+          setActivePage={setActivePage}
+          closePage={closePage}
+        />
       </div>
     </div>
   );

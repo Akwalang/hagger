@@ -1,3 +1,5 @@
+import { MouseEvent } from "react";
+
 import { Group } from "@/global/stores/workspace";
 import { PageWithData } from "@/global/stores/workspace/slices/page/state";
 
@@ -11,7 +13,8 @@ interface ButtonAllTabsProps {
   className?: string;
   group: Group;
   pages: Record<string, PageWithData>;
-  onSelect: (id: string) => void;
+  setActivePage: (id: string) => void;
+  closePage: (id: string) => void;
 }
 
 export const ButtonAllTabs: React.FC<ButtonAllTabsProps> = (props) => {
@@ -19,7 +22,8 @@ export const ButtonAllTabs: React.FC<ButtonAllTabsProps> = (props) => {
     const sets = {
       id,
       name: props.pages[id].tab.name,
-      onClick: props.onSelect,
+      setActivePage: props.setActivePage,
+      closePage: props.closePage,
       isActive: id === props.group.activePageId,
     };
 
@@ -54,12 +58,26 @@ interface OptionProps {
   id: string;
   name: string;
   isActive: boolean;
-  onClick: (id: string) => void;
+  setActivePage: (id: string) => void;
+  closePage: (id: string) => void;
 }
 
 const Option: React.FC<OptionProps> = (props) => {
+  const onClick = (event: MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
+  const onMouseDown = (event: MouseEvent<HTMLDivElement>): void => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    event.button === 0 && props.setActivePage(props.id);
+    event.button === 1 && props.closePage(props.id);
+  };
+
   return (
-    <Base.DropdownMenuItem onClick={() => props.onClick(props.id)}>
+    <Base.DropdownMenuItem onClick={onClick} onMouseDown={onMouseDown}>
       <div className="w-full flex items-center justify-between">
         <div className="text-ellipsis overflow-hidden whitespace-nowrap">{props.name}</div>
         <div className="w-[32px] flex items-center justify-center">{props.isActive && <Icon icon={IconType.Check} size={16} />}</div>

@@ -16,7 +16,9 @@ export const closePage = (set: any) => (pageId: string) => {
 
     const pageIds = group.pageIds.filter((_, i) => i !== idx);
 
-    const activePageId = pageIds[idx !== 0 ? idx - 1 : 0] || null;
+    const activePageId = pageId === group.activePageId
+      ? pageIds[idx !== 0 ? idx - 1 : 0] || null
+      : group.activePageId;
 
     return {
       groups: replace(
