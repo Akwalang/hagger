@@ -116,7 +116,7 @@ export const changeRequestUrl = (set: any) => (url: string) => {
 
     const components = Url.parseUrl(url);
 
-    const path = Plc.extract(url, Plc.Types.Colon).map((item) => item.value);
+    const path = Plc.extract(components.path || '', Plc.Types.Colon).map((item) => item.value);
     const query = Url.parseSearch(components.search);
 
     const params = {
