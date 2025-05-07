@@ -20,7 +20,6 @@ interface TabProps {
 
 export const Tab: React.FC<TabProps> = (props) => {
   const onMouseDown = (event: MouseEvent<HTMLDivElement>) => {
-    event.preventDefault();
     event.stopPropagation();
 
     event.button === 0 && props.setActivePage(props.id);
@@ -57,7 +56,7 @@ export const Tab: React.FC<TabProps> = (props) => {
               "w-[24px] h-full box-content py-[1px] flex items-center cursor-pointer",
               "hover:bg-primary/20 hover:[&>svg]:stroke-primary",
             )}
-            onClick={onCrossClick}
+            onMouseDown={onCrossClick}
           >
             <X className="h-[14px]" />
           </div>
