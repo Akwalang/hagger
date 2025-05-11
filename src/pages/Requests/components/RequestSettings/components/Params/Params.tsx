@@ -6,6 +6,7 @@ import { useLang } from '@/global/hooks/useLang';
 interface ParamsProp {
   path: KeyValueItem[];
   query: KeyValueItem[];
+  fieldClassName?: string;
 }
 
 export const Params: React.FC<ParamsProp> = (props) => {
@@ -19,12 +20,21 @@ export const Params: React.FC<ParamsProp> = (props) => {
       { !!props.path.length &&
         <div>
           <h4 className="mb-2 text-sm select-none">{lang.pathVariablesTitle()}</h4>
-          <Form.KeyValueEditor items={props.path} onChange={changeRequestPathParams} />
+          <Form.KeyValueEditor
+            items={props.path}
+            fieldClassName={props.fieldClassName}
+            onChange={changeRequestPathParams}
+          />
         </div>
       }
       <div>
         <h4 className="mb-2 text-sm select-none">{lang.queryParamsTitle()}</h4>
-        <Form.KeyValueEditor extendable={true} items={props.query} onChange={changeRequestQueryParams}  />
+        <Form.KeyValueEditor
+          extendable={true}
+          items={props.query}
+          fieldClassName="hover:bg-primary/10 focus:bg-primary/10"
+          onChange={changeRequestQueryParams}
+        />
       </div>
     </div>
   );

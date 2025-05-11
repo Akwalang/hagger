@@ -14,9 +14,19 @@ interface RequestSettingsProps extends PageRequest {}
 export const RequestSettings: React.FC<RequestSettingsProps> = memo((props) => {
   const lang = useLang((store) => store.pages.requests.requestSettings.tabs);
 
+  const fieldClassName = 'hover:bg-primary/10 focus:bg-primary/10';
+
   const tabs = [
-    { name: lang.params.name(), value: 'params', content: () => <Params {...props.request.params} /> },
-    { name: lang.headers.name(), value: 'headers', content: () => <Headers headers={props.request.headers} /> },
+    {
+      name: lang.params.name(),
+      value: 'params',
+      content: () => <Params {...props.request.params} fieldClassName={fieldClassName} />,
+    },
+    {
+      name: lang.headers.name(),
+      value: 'headers',
+      content: () => <Headers headers={props.request.headers} fieldClassName={fieldClassName} />,
+    },
   ];
 
   return (

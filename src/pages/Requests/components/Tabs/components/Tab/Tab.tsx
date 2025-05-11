@@ -43,7 +43,7 @@ export const Tab: React.FC<TabProps> = (props) => {
       )} onMouseDown={onMouseDown}>
         <TabContextMenu pageId={props.id}>
           <div className="flex flex-col justify-center grow h-full pl-3 pr-0.5">
-            <div className={`text-[0.6rem] px-1 py-0 ml-[-3px] mb-[-4px] opacity-85`}>{props.badge.text}</div>
+            <div className={`text-[0.7rem] px-1 py-0 ml-[-3px] mb-[-2px] opacity-85`}>{props.badge.text}</div>
             <div className="relative w-full">
               {WHITESPACE}
               <div className="absolute left-0 top-0 w-full h-full text-ellipsis overflow-hidden whitespace-nowrap">

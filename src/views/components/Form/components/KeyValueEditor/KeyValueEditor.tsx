@@ -42,13 +42,14 @@ interface KeyValueItemProps {
   idx: number;
   item: KeyValueItem;
   isNew?: boolean;
+  fieldClassName?: string;
   onChange: (idx: number, update: Partial<KeyValueItem>) => void;
 }
 
 const KeyValueItem: React.FC<KeyValueItemProps> = memo((props) => {
   const { idx, item } = props;
 
-  const fieldClassName = "px-2 py-1.5 border-[1px]";
+  const fieldClassName = cn("px-2 py-1.5 border-[1px]", props.fieldClassName);
 
   const onChange = useMemo(() => {
     const { onChange } = props;
@@ -106,6 +107,7 @@ interface KeyValueEditorProps {
   extendable?: boolean;
   items: KeyValueItem[];
   edit?: (keyof KeyValueItem)[];
+  fieldClassName?: string;
   onChange: (idx: number, update: Partial<KeyValueItem>) => void;
 }
 
@@ -146,6 +148,7 @@ export const KeyValueEditor: React.FC<KeyValueEditorProps> = (props) => {
           idx={i}
           isNew={isNew}
           item={item}
+          fieldClassName={props.fieldClassName}
           onChange={props.onChange}
         />
       ))}

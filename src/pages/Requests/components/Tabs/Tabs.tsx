@@ -34,9 +34,9 @@ export const Tabs: React.FC<TabsProps> = () => {
   });
 
   return (
-    <div className="relative flex flex-row h-[38px] w-full">
+    <div className="relative flex flex-row h-[44px] w-full">
       <HorizontalScrollArea className="max-w-full grow h-full flex justify-center overflow-visible">
-        <div className="flex w-full h-[35px] pr-[77px] items-center [&>div]:last:hidden" children={tabs} />
+        <div className="flex w-full h-[41px] pr-[77px] items-center [&>div]:last:hidden" children={tabs} />
         <ScrollBar
           className="h-[5px] [&>div]:top-[5px] [&>div]:bg-foreground"
           orientation="horizontal"

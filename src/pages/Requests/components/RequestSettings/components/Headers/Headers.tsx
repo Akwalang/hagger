@@ -6,6 +6,7 @@ import { useWorkspaceStore } from '@/global/stores/workspace';
 
 interface HeadersProp {
   headers: KeyValueItem[];
+  fieldClassName?: string;
 }
 
 export const Headers: React.FC<HeadersProp> = (props) => {
@@ -24,7 +25,12 @@ export const Headers: React.FC<HeadersProp> = (props) => {
     <div className="flex flex-col px-[15px] pb-[15px] gap-[8px]">
       <div>
         <h4 className="mb-2 text-sm select-none">{lang.headersTitle()}</h4>
-        <Form.KeyValueEditor extendable={true} items={headers} onChange={changeRequestHeaders} />
+        <Form.KeyValueEditor
+          extendable={true}
+          items={headers}
+          fieldClassName={props.fieldClassName}
+          onChange={changeRequestHeaders}
+        />
       </div>
     </div>
   );

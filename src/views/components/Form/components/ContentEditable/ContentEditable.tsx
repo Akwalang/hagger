@@ -15,7 +15,8 @@ interface ContentEditableProps {
   multiline?: boolean;
   placeholder?: string;
   options?: string[];
-  disabled?: boolean
+  disabled?: boolean;
+  stopPropagation?: boolean;
   onChange: (value: string) => void;
   onFocus?: () => void;
   onBlur?: () => void;
@@ -27,6 +28,10 @@ export const ContentEditable: React.FC<ContentEditableProps> = memo((props) => {
   const [suggestions, setSuggestions] = useState<string[]>(filterSuggestions(value, props.options));
 
   const field = useRef<HTMLDivElement>(null);
+
+  const stopPropagation = (event: React.MouseEvent<HTMLDivElement>) => {
+    props.stopPropagation && event.stopPropagation();
+  };
 
   const onChange = (value: string) => {
     props.onChange?.(value.trim());
@@ -82,6 +87,8 @@ export const ContentEditable: React.FC<ContentEditableProps> = memo((props) => {
             "focus:outline-0 focus:relative focus:border-primary focus:z-1",
           )}
           disabled={props.disabled || false}
+          onClick={stopPropagation}
+          onMouseDown={stopPropagation}
           onInput={() => onChange(field.current!.textContent ?? "")}
           onFocus={() => onFocus()}
         />
@@ -94,6 +101,8 @@ interface FieldProps {
   value: string;
   disabled: boolean;
   className: string;
+  onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
+  onMouseDown: (event: React.MouseEvent<HTMLDivElement>) => void;
   onInput: () => void;
   onFocus: () => void;
 }

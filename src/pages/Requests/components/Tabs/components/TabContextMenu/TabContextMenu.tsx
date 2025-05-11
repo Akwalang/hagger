@@ -52,6 +52,7 @@ export const TabContextMenu: React.FC<TabContextMenuProps> = (props) => {
               value={page.tab.name}
               placeholder={lang.pageNamePlaceholder()}
               onChange={(value) => renamePage(page.id, value)}
+              stopPropagation={true}
             />
           </Base.ContextMenuLabel>
 

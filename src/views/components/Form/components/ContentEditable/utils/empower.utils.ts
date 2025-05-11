@@ -5,7 +5,7 @@ type Options = {
 export const empower = (element: HTMLDivElement, options: Options): () => void => {
   if (isEmpowered(element)) return () => {};
 
-  addLineBreakIfNeeded(element);
+  addLineBreakIfNeeded(element, options);
 
   const handleEnter = (event: KeyboardEvent) => {
     // console.log('Before:', element.innerHTML);
@@ -54,11 +54,12 @@ const isEmpowered = (element: HTMLDivElement): boolean => {
   return status;
 };
 
-const addLineBreakIfNeeded = (element: HTMLDivElement) => {
+const addLineBreakIfNeeded = (element: HTMLDivElement, options: Options) => {
   const last = element.lastChild as any;
 
   let exit = false;
 
+  exit ||= !options.multiline;
   exit ||= !last;
   exit ||= last.tagname === "BR";
 
